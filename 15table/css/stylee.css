@@ -1,0 +1,8 @@
+tr, th, td{
+  padding: 5px;
+  border: 2px black solid;
+}
+body{
+  align-items: center;
+  justify-content: center;
+}

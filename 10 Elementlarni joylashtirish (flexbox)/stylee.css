@@ -1,0 +1,30 @@
+*{
+  padding: 0;
+  margin: 0;
+}
+.parents{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  background-color: yellow;
+  height: 100vh;
+}
+.childfirst{
+  width: 150px;
+  height: 80px;
+  background-color: deeppink;
+  border-radius: 8px;
+}
+.childsecond{
+ width: 150px;
+  height: 80px;
+  background-color: red;
+  border-radius: 8px;
+}
+.childthird{
+   width: 150px;
+  height: 80px;
+  background-color:purple;
+  border-radius: 8px;
+}

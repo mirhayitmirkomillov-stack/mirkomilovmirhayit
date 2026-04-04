@@ -1,0 +1,22 @@
+body{
+  background-size: cover;
+  background-image: url(https://avatars.mds.yandex.net/i?id=bb19fbf5a39475dc8ac9ff1490f234f644da3325-9851898-images-thumbs&n=13 );
+}
+
+
+
+.parent{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+
+.box{
+  width: 450px;
+  height: 350px;
+  border-radius: 8px;
+  margin-top: 35px;
+  backdrop-filter: blur(30px);
+}
+

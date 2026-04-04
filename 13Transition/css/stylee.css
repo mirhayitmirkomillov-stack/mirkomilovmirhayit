@@ -1,0 +1,38 @@
+h1{
+  width: 400px;
+  background-color: yellow;
+  transition-duration: 3s;
+  color: red;
+transition-property: background-color,color,width;
+
+
+}
+h1:hover{
+  width: 700px;
+  color: yellow;
+  background-color: red;
+}
+
+
+
+
+
+
+
+img{
+  width: 500px;
+  height: 500px;
+  border-radius: 8%;
+  margin-left: 0;
+  transform: rotate(0deg);
+ /* transition: 1s;*/
+  transition-duration: 1s;
+  transition-delay: 3s;
+  transition-property:transform,border-radius,margin-left;
+  transition-timing-function: linear;
+}
+img:hover{
+  transform: rotate(180deg);
+border-radius: 50%;
+  margin-left: 300px;
+}

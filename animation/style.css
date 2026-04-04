@@ -1,0 +1,39 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+body{
+  background-image: url("https://vashifotooboi.ru/tools/cache_image/products/2254/fotooboi-dorogi-kupit-0047_700x0_5ff.jpg");
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.parent{
+  background-image: url("https://wallpapers.com/images/hd/black-sedan-silhouette-04awhexdzngpooky.png");
+  width: 700px;
+  height: 220px;
+  background-size: cover;
+  animation-name: animationTransform;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+  position: relative;
+}
+@keyframes animationTransform {
+  0%{
+    left: 0;
+    top: 100px;
+  }
+  50%{
+    top: 100px;
+    left: 400px;
+    right: 0;
+  }
+  100%{
+    left: 0;
+    top: 100px;
+    right: 200px;
+  }
+}

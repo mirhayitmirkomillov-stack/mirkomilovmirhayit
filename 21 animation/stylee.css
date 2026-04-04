@@ -1,0 +1,61 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+body{
+  background: purple;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.box{
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(20deg, rosybrown, green);
+  animation-name: animationTransform;
+  animation-duration: 4s;
+ animation-iteration-count: infinite;
+  position: relative;
+animation-timing-function: cubic-bezier(0.1, 0.38, 0.69, 0.17);
+}
+@keyframes animationRotate {
+  from{
+    left: 0;
+    border-radius: 0;
+    bottom: 0;
+    transform: rotate(0);
+  }
+  to{
+    background: linear-gradient( blueviolet, black);
+    bottom: 300px;
+    border-radius: 50%;
+    left: 500px;
+    transform: rotate(120deg);
+  }
+}
+@keyframes animationTransform {
+  0%{
+    background: green;
+    top: 0;
+  }
+  25%{
+    left: 0;
+    top:300px;
+    background: #333333;
+  }
+  50%{
+    left:300px;
+    top:300px;
+    background:darkblue;
+  }
+  75%{
+    top: 0;
+    background: orange;
+    left: 300px;
+  }
+  100%{
+    background: red;
+    left: 0;
+  }
+}

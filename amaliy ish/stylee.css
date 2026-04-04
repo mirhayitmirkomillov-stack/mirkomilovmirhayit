@@ -1,0 +1,49 @@
+*{
+  padding: 0;
+  margin: 0;
+}
+
+body{
+  background-size: cover;
+  background-image: url("https://wallpapers.com/images/hd/macbook-background-yll4bt60lklj412d.jpg");
+}
+
+.parent{
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.box{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+  color: white;
+  width: 500px;
+  height: 500px;
+  border: 3px white solid;
+  border-radius: 15px;
+}
+.first{
+  align-self: flex-end;
+}
+
+.box .image{
+  width: 400px;
+  height: 250px;
+  border-radius: 20px;
+}
+.box .contentText{
+  font-size: 25px;
+}
+
+.box .link{
+  text-decoration: none;
+  background-color: white;
+  padding: 7px;
+  border-radius: 8px;
+}
+
+

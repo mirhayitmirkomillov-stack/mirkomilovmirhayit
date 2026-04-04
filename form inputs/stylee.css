@@ -1,0 +1,56 @@
+ body{
+    background-image: url("https://avatars.mds.yandex.net/get-mpic/4081122/img_id2080476699306903271.jpeg/orig");
+    display: flex;
+  background-size: cover;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+form {
+    width: 400px;
+    height: 550px;
+    background-color: rgba(238, 238, 238, 0.6);
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-self: center;
+    transition: 0.5s;
+}
+form:hover{
+    box-shadow: 10px 10px 10px blue;
+}
+#comes,#name{
+    margin-top: 20px;
+    background-image: linear-gradient(to right,white,deepskyblue);
+    margin-left: 20px;
+    margin-right: 20px;
+    font-size: 20px;
+    padding: 7px;
+    border-right: 8px black;
+}
+.box{
+    margin-top: 50px;
+}
+#for{
+    width: 35px;
+    height: 35px;
+    font-size: 25px;
+}
+.contain{
+    font-size: 25px;
+ background-image: linear-gradient(to left, #ffffff, #00b2ff);
+    width: 65px;
+    align-self: center;
+    padding: 5px;
+    text-decoration: none;
+}
+.parent{
+    margin-top: 20px;
+    color: #1d1e21;
+    font-size: 40px;
+}
+.child{
+    display: flex;
+    align-items: center;
+    align-self: center;
+}

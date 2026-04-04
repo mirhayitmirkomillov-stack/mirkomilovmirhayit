@@ -1,0 +1,143 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+body{
+  background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  position: relative;
+  flex-direction: column;
+  flex-wrap: wrap;
+  text-align: center;
+  font-size: 18px;
+  color: white;
+}
+.parent{
+  background-image: url("https://avatars.mds.yandex.net/i?id=b276cd656b9763c28d6c9faf939de78a959a634b-11951022-images-thumbs&n=13");
+  background-size: cover;
+  width: 500px;
+  height: 550px;
+  background-color: black;
+  border: 5px solid white;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 15px;
+  filter: grayscale(100%);
+}
+.box{
+backdrop-filter: blur(50px);
+  position: absolute;
+  width: 500px;
+  height: 300px;
+  top:+700px;
+  transition: 1s;
+}
+.part{
+
+  align-items: center;
+
+}
+.parent:hover .box{
+  backdrop-filter: blur(50px);
+  top: 250px;
+  box-shadow:0 0 30px white;
+  border-radius: 8px;
+}
+h1{
+  font-size: 30px;
+}
+.parent:hover{
+  background-image: url("https://avatars.mds.yandex.net/i?id=b276cd656b9763c28d6c9faf939de78a959a634b-11951022-images-thumbs&n=13");
+  background-size: cover;
+  box-shadow:  0 0 8px white;
+  filter: grayscale(0%);
+  transition: 1s;
+}
+
+.parent1{
+  background-image: url("https://avatars.mds.yandex.net/i?id=2cc39139243e01bda2c335d2a77ee5ca0b3268b9-4768962-images-thumbs&n=13");
+  background-size: cover;
+  width: 500px;
+  height: 550px;
+  background-color: black;
+  border: 5px solid white;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 15px;
+  filter: grayscale(100%);
+}
+.box1{
+  backdrop-filter: blur(50px);
+  position: absolute;
+  width: 500px;
+  height: 300px;
+  top:+700px;
+  transition: 1s;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+.parent1:hover .box1{
+  backdrop-filter: blur(50px);
+  top: 250px;
+  box-shadow:0 0 30px white;
+  border-radius: 8px;
+}
+.parent1:hover{
+  background-image: url("https://avatars.mds.yandex.net/i?id=2cc39139243e01bda2c335d2a77ee5ca0b3268b9-4768962-images-thumbs&n=13");
+  background-size: cover;
+  box-shadow:  0 0 8px white;
+  filter: grayscale(0%);
+  transition: 1s;
+}
+.parent2{
+  background-image: url("https://avatars.mds.yandex.net/i?id=2a0000017a1a647556a9471a3cd38afeb54c-3381135-images-thumbs&n=13");
+  background-size: cover;
+  width: 500px;
+  height: 550px;
+  background-color: black;
+  border: 5px solid white;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 15px;
+  filter: grayscale(100%);
+}
+.box2{
+  backdrop-filter: blur(50px);
+  position: absolute;
+  width: 500px;
+  height: 300px;
+  top:+700px;
+  transition: 1s;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+.parent2:hover .box2{
+  backdrop-filter: blur(50px);
+  top: 250px;
+  box-shadow:0 0 30px white;
+  border-radius: 8px;
+}
+.parent2:hover{
+  background-image: url("https://avatars.mds.yandex.net/i?id=2a0000017a1a647556a9471a3cd38afeb54c-3381135-images-thumbs&n=13");
+  background-size: cover;
+  box-shadow:  0 0 8px white;
+  filter: grayscale(0%);
+  transition: 2s;
+}
+p{
+ margin-top: 20px;
+}

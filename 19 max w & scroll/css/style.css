@@ -1,0 +1,28 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+body{
+  text-align: center;
+  background: black;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.main{
+  text-align: center;
+  width: 500px;
+  height: 140px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  overflow-x:scroll ;
+}
+.box{
+  width: 100px;
+  height: 100px;
+  background: blueviolet;
+  border: 3px solid red;
+  min-width: 100px;
+}
