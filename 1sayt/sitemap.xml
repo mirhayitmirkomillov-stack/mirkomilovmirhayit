@@ -3,7 +3,37 @@
   <url>
     <loc>https://mirhayitmirkomillov-stack.github.io/mirkomilovmirhayit/</loc>
     <lastmod>2026-07-29</lastmod>
-    <changefreq>weekly</changefreq>
+    <changefreq>daily</changefreq>
     <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://mirhayitmirkomillov-stack.github.io/mirkomilovmirhayit/?category=electronics</loc>
+    <lastmod>2026-07-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mirhayitmirkomillov-stack.github.io/mirkomilovmirhayit/?category=clothing</loc>
+    <lastmod>2026-07-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mirhayitmirkomillov-stack.github.io/mirkomilovmirhayit/?category=home</loc>
+    <lastmod>2026-07-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mirhayitmirkomillov-stack.github.io/mirkomilovmirhayit/?category=beauty</loc>
+    <lastmod>2026-07-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mirhayitmirkomillov-stack.github.io/mirkomilovmirhayit/?category=sports</loc>
+    <lastmod>2026-07-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
 </urlset>
