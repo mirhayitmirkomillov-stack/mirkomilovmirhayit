@@ -3,7 +3,7 @@ const LANGS = {
   uz: {
     search: "Mahsulot qidirish...", categories: "Kategoriyalar", all_products: "Barcha mahsulotlar",
     electronics: "Elektronika", clothing: "Kiyim-kechak", home: "Uy buyumlari", beauty: "Go'zallik",
-    sports: "Sport", kids: "Bolalar", books: "Kitoblar", food: "Oziq-ovqat",
+    sports: "Sport",
     price_range: "Narx oralig'i", sort_by: "Saralash", admin_panel: "Admin panel",
     my_cart: "Mening savatim", my_favorites: "Sevimlilarim",
     login: "Kirish", register: "Ro'yxatdan o'tish", email: "Email", password: "Parol",
@@ -37,7 +37,7 @@ const LANGS = {
   ru: {
     search: "Поиск товаров...", categories: "Категории", all_products: "Все товары",
     electronics: "Электроника", clothing: "Одежда", home: "Для дома", beauty: "Красота",
-    sports: "Спорт", kids: "Детские", books: "Книги", food: "Продукты",
+    sports: "Спорт",
     price_range: "Ценовой диапазон", sort_by: "Сортировка", admin_panel: "Админ панель",
     my_cart: "Моя корзина", my_favorites: "Избранное",
     login: "Войти", register: "Регистрация", email: "Электронная почта", password: "Пароль",
@@ -70,7 +70,7 @@ const LANGS = {
   en: {
     search: "Search products...", categories: "Categories", all_products: "All Products",
     electronics: "Electronics", clothing: "Clothing", home: "Home", beauty: "Beauty",
-    sports: "Sports", kids: "Kids", books: "Books", food: "Food",
+    sports: "Sports",
     price_range: "Price Range", sort_by: "Sort By", admin_panel: "Admin Panel",
     my_cart: "My Cart", my_favorites: "Favorites",
     login: "Login", register: "Register", email: "Email", password: "Password",
@@ -107,49 +107,43 @@ const LANGS = {
   {id:4,name:"AirPods Pro 2 USB-C",category:"electronics",price:2899000,oldPrice:3499000,discount:17,image:"🎧",rating:4.7,reviews:312,sold:2100,desc:"Apple AirPods Pro 2, Active Noise Cancellation, USB-C.",date:"2026-02-10"},
   {id:5,name:"Nike Air Max 270",category:"clothing",price:1899000,oldPrice:2499000,discount:24,image:"👟",rating:4.5,reviews:98,sold:670,desc:"Nike Air Max 270 erkaklar krossovkasi, Air Max yastig'i.",date:"2026-02-15"},
   {id:6,name:"Dyson V15 Detect",category:"home",price:8999000,oldPrice:10999000,discount:18,image:"🧹",rating:4.8,reviews:87,sold:450,desc:"Dyson V15 changyutgich, laser detektor, 60 daqiqa.",date:"2026-03-01"},
-  {id:7,name:"LEGO Technic Porsche 911",category:"kids",price:4599000,oldPrice:5299000,discount:13,image:"🧱",rating:4.9,reviews:67,sold:320,desc:"LEGO Technic Porsche 911 GT3 RS, 3291 dona.",date:"2026-03-05"},
-  {id:8,name:"The Alchemist (Uzbek)",category:"books",price:89000,oldPrice:120000,discount:26,image:"📖",rating:4.6,reviews:234,sold:1800,desc:"Paulo Coelho romani. Sarguzasht va orzular haqida.",date:"2026-01-01"},
+
   {id:9,name:"Nike Dri-FIT Sport Forma",category:"sports",price:1299000,oldPrice:1599000,discount:19,image:"⚽",rating:4.4,reviews:76,sold:540,desc:"Nike Dri-FIT sport formasi, namlilikni tortadi.",date:"2026-02-20"},
   {id:10,name:"La Prairie Skin Caviar",category:"beauty",price:5999000,oldPrice:7299000,discount:18,image:"✨",rating:4.8,reviews:45,sold:230,desc:"La Prairie Skin Caviar terini qarishga qarshi krem.",date:"2026-03-10"},
   {id:11,name:"Xiaomi Redmi Note 13 Pro",category:"electronics",price:3299000,oldPrice:3999000,discount:18,image:"📱",rating:4.5,reviews:456,sold:3200,desc:"Xiaomi Redmi Note 13 Pro, 200MP kamera, 5100mAh.",date:"2026-03-15"},
   {id:12,name:"Uniqlo Heattech Termal",category:"clothing",price:299000,oldPrice:399000,discount:25,image:"👕",rating:4.3,reviews:198,sold:2800,desc:"Uniqlo Heattech issiqlik saqlovchi termal ko'ylak.",date:"2026-02-25"},
   {id:13,name:"IKEA KALLAX Taxtali",category:"home",price:1599000,oldPrice:1999000,discount:20,image:"🪑",rating:4.4,reviews:123,sold:780,desc:"IKEA KALLAX 4-bo'limli taxtali, oq rang.",date:"2026-01-10"},
   {id:14,name:"Oral-B iO Series 9",category:"beauty",price:3499000,oldPrice:4299000,discount:19,image:"🪥",rating:4.7,reviews:89,sold:560,desc:"Oral-B iO Series 9 elektr tish cho'tkasi, AI.",date:"2026-03-08"},
-  {id:15,name:"Barbie O'yingohi 150d",category:"kids",price:899000,oldPrice:1199000,discount:25,image:"🏰",rating:4.6,reviews:134,sold:920,desc:"Barbie o'yingohi, 150 dona, 3 qavat, mebel bilan.",date:"2026-02-14"},
-  {id:16,name:"Atomic Habits (Uzbek)",category:"books",price:99000,oldPrice:140000,discount:29,image:"📚",rating:4.9,reviews:312,sold:2400,desc:"James Clear - odatlar haqida mashhur kitob.",date:"2026-01-20"},
+
   {id:17,name:"Adidas Predator FG",category:"sports",price:2199000,oldPrice:2799000,discount:21,image:"👟",rating:4.6,reviews:87,sold:430,desc:"Adidas Predator futbol poyafzali.",date:"2026-03-12"},
   {id:18,name:"O'zbekiston Milliy Libos",category:"clothing",price:499000,oldPrice:649000,discount:23,image:"🇺🇿",rating:4.7,reviews:256,sold:1800,desc:"O'zbekiston milliy liboslar to'plami.",date:"2026-02-01"},
   {id:19,name:"JBL Charge 5",category:"electronics",price:1899000,oldPrice:2299000,discount:17,image:"🔊",rating:4.7,reviews:198,sold:1340,desc:"JBL Charge 5 portativ dynamics, suv o'tkazmas.",date:"2026-02-05"},
-  {id:20,name:"Kurigou Premium Qahva 1kg",category:"food",price:189000,oldPrice:249000,discount:24,image:"☕",rating:4.5,reviews:167,sold:2100,desc:"Kurigou premium qahva, 100% arabika.",date:"2026-03-01"},
+
   {id:21,name:"iPhone 14 128GB",category:"electronics",price:8999000,oldPrice:10999000,discount:18,image:"📱",rating:4.6,reviews:345,sold:2800,desc:"iPhone 14, A15 Bionic, 12MP kamera, 6.1 dyuym.",date:"2025-12-01"},
   {id:22,name:"IKEA MALM Yotoq",category:"home",price:3299000,oldPrice:4199000,discount:21,image:"🛏️",rating:4.5,reviews:98,sold:340,desc:"IKEA MALM yotoq ramkasi, 160x200, oq.",date:"2026-01-15"},
-  {id:23,name:"LEGO Star Wars Falcon",category:"kids",price:7999000,oldPrice:9299000,discount:14,image:"🚀",rating:4.9,reviews:56,sold:180,desc:"LEGO Star Wars Millennium Falcon, 7541 dona.",date:"2026-03-20"},
+
   {id:24,name:"Bioderma Sensibio H2O",category:"beauty",price:459000,oldPrice:549000,discount:16,image:"💧",rating:4.8,reviews:213,sold:1600,desc:"Bioderma Sensibio micellar suv, sezgir teri uchun.",date:"2026-02-10"},
-  {id:25,name:"Dunyo Bo'ylab Sayohat",category:"books",price:120000,oldPrice:160000,discount:25,image:"🌍",rating:4.4,reviews:89,sold:670,desc:"Dunyo mamlakatlari haqida sayohat kitobi.",date:"2026-02-20"},
+
   {id:26,name:"Yoga Mat Premium 6mm",category:"sports",price:399000,oldPrice:549000,discount:27,image:"🧘",rating:4.5,reviews:145,sold:1200,desc:"Premium yoga mat, kvchli yuzasi, ekologik.",date:"2026-03-05"},
   {id:27,name:"Fitbit Charge 6",category:"electronics",price:2499000,oldPrice:2999000,discount:17,image:"⌚",rating:4.4,reviews:123,sold:890,desc:"Fitbit Charge 6 fitness treker, GPS, uyqu.",date:"2026-02-15"},
   {id:28,name:"Oshxona Asboblari 12d",category:"home",price:599000,oldPrice:799000,discount:25,image:"🍳",rating:4.3,reviews:78,sold:450,desc:"12 qismli oshxona asboblari, zanglamaydigan po'lat.",date:"2026-03-01"},
-  {id:29,name:"Organik Asal 500ml",category:"food",price:129000,oldPrice:169000,discount:24,image:"🍯",rating:4.7,reviews:234,sold:3200,desc:"Tabiiy organik asal, Qashqadaryo.",date:"2026-01-01"},
+
   {id:30,name:"Puma RS-X Effekt",category:"clothing",price:1499000,oldPrice:1999000,discount:25,image:"👟",rating:4.4,reviews:67,sold:380,desc:"Puma RS-X Effekt retro krossovka.",date:"2026-03-10"},
   {id:31,name:"Oppo Find X7 Ultra",category:"electronics",price:11499000,oldPrice:13499000,discount:15,image:"📱",rating:4.6,reviews:98,sold:560,desc:"Oppo Find X7 Ultra, 50MP Hasselblad.",date:"2026-03-18"},
   {id:32,name:"H&M Zamonaviy Palto",category:"clothing",price:899000,oldPrice:1199000,discount:25,image:"🧥",rating:4.3,reviews:54,sold:290,desc:"H&M zamonaviy palto, issiq, shahar uslubida.",date:"2026-02-28"},
   {id:33,name:"Philips Hue Starter Kit",category:"home",price:2799000,oldPrice:3299000,discount:15,image:"💡",rating:4.6,reviews:87,sold:420,desc:"Philips Hue aqlli yorug'lik to'plami, 3 dona.",date:"2026-03-15"},
   {id:34,name:"Garnier SkinActive",category:"beauty",price:149000,oldPrice:199000,discount:25,image:"🧴",rating:4.3,reviews:189,sold:1900,desc:"Garnier SkinActive nemlendirici krem.",date:"2026-01-10"},
   {id:35,name:"Decathlon Yoga Blok 2d",category:"sports",price:179000,oldPrice:249000,discount:28,image:"🧱",rating:4.2,reviews:67,sold:560,desc:"Decathlon yoga bloklari, EVA material.",date:"2026-02-15"},
-  {id:36,name:"Hot Wheels Mega Garage",category:"kids",price:1199000,oldPrice:1599000,discount:25,image:"🏎️",rating:4.7,reviews:178,sold:890,desc:"Hot Wheels Mega Garage, 6+ qavat, lift.",date:"2026-03-01"},
-  {id:37,name:"Sherlock Holmes To'plam",category:"books",price:159000,oldPrice:210000,discount:24,image:"🔍",rating:4.8,reviews:167,sold:1200,desc:"Sherlock Holmes hikoyalari, Arthur Conan Doyle.",date:"2026-02-01"},
-  {id:38,name:"Organik Choy 6 xil",category:"food",price:219000,oldPrice:299000,discount:27,image:"🍵",rating:4.6,reviews:123,sold:1800,desc:"6 xil organik choy to'plami.",date:"2026-01-15"},
+
   {id:39,name:"Razer DeathAdder V3",category:"electronics",price:1199000,oldPrice:1499000,discount:20,image:"🖱️",rating:4.7,reviews:134,sold:780,desc:"Razer DeathAdder V3 gaming mouse, 30000 DPI.",date:"2026-03-20"},
   {id:40,name:"Zara Ayollar Krossovka",category:"clothing",price:799000,oldPrice:999000,discount:20,image:"👠",rating:4.2,reviews:89,sold:450,desc:"Zara ayollar krossovkasi, oq, zamonaviy.",date:"2026-02-10"},
   {id:41,name:"Roborock S8 Pro Ultra",category:"home",price:12999000,oldPrice:15999000,discount:19,image:"🤖",rating:4.8,reviews:45,sold:120,desc:"Roborock S8 Pro Ultra avtomatik changyutgich.",date:"2026-03-25"},
   {id:42,name:"Maybelline Lash Sens.",category:"beauty",price:99000,oldPrice:139000,discount:29,image:"👁️",rating:4.4,reviews:267,sold:2400,desc:"Maybelline Lash Sensational maskara.",date:"2026-01-05"},
   {id:43,name:"Wilson Tennis Racket",category:"sports",price:999000,oldPrice:1299000,discount:23,image:"🎾",rating:4.5,reviews:56,sold:230,desc:"Wilson US Open tennisi raketa, 270g.",date:"2026-03-08"},
-  {id:44,name:"Crayola 120 Rangli Qalam",category:"kids",price:349000,oldPrice:449000,discount:22,image:"🖍️",rating:4.6,reviews:98,sold:780,desc:"Crayola 120 rangli qalam, yorqin ranglar.",date:"2026-02-20"},
-  {id:45,name:"Qishloq Xo'jalik Kalendari",category:"books",price:75000,oldPrice:100000,discount:25,image:"🌱",rating:4.1,reviews:34,sold:290,desc:"O'zbekiston qishloq xo'jaligi kalendari.",date:"2026-01-01"},
-  {id:46,name:"Kungaboqar Moyi 1L",category:"food",price:42000,oldPrice:55000,discount:24,image:"🫒",rating:4.3,reviews:456,sold:5600,desc:"100% toza kungaboqar moyi, 1 litr.",date:"2026-03-01"},
+
   {id:47,name:"ASUS ROG Strix G16",category:"electronics",price:22999000,oldPrice:26999000,discount:15,image:"🖥️",rating:4.8,reviews:67,sold:230,desc:"ASUS ROG Strix G16, RTX 4070, i7-14700HX.",date:"2026-03-22"},
   {id:48,name:"Massimo Dutti Kostyum",category:"clothing",price:2999000,oldPrice:3999000,discount:25,image:"👔",rating:4.6,reviews:45,sold:180,desc:"Massimo Dutti erkaklar kostyum, tikilgan.",date:"2026-03-10"},
-  {id:49,name:"Lego Friends Heartlake",category:"kids",price:2499000,oldPrice:2999000,discount:17,image:"🏠",rating:4.7,reviews:89,sold:340,desc:"Lego Friends Heartlake City, 1845 dona.",date:"2026-02-14"},
+
   {id:50,name:"Samsung 55 QLED 4K TV",category:"electronics",price:9999000,oldPrice:12999000,discount:23,image:"📺",rating:4.7,reviews:134,sold:560,desc:"Samsung 55 QLED 4K Smart TV, Quantum Dot.",date:"2026-01-20"},
   // === KIYIM-KECHAK ===
   {id:51,name:"Adidas Originals Hoodie",category:"clothing",price:699000,oldPrice:899000,discount:22,image:"🧥",rating:4.4,reviews:89,sold:430,desc:"Adidas Originals erkaklar hoodie, paxta, zamonaviy.",date:"2026-04-01"},
@@ -174,24 +168,7 @@ const LANGS = {
   {id:67,name:"JBL Endurance Peak 3",category:"sports",price:1199000,oldPrice:1499000,discount:20,image:"🎧",rating:4.5,reviews:134,sold:780,desc:"JBL Endurance Peak 3 sport quloqchinlari.",date:"2026-04-05"},
   {id:68,name:"NordicTrack Treadmill",category:"sports",price:15999000,oldPrice:19999000,discount:20,image:"🏃",rating:4.8,reviews:34,sold:120,desc:"NordicTrack T6.5 S yugurish yo'lakchasi.",date:"2026-03-20"},
   {id:69,name:"Gym Pro Dumbbell 20kg",category:"sports",price:899000,oldPrice:1199000,discount:25,image:"🏋️",rating:4.4,reviews:98,sold:560,desc:"Gym Pro dumbbell to'plami, 2x10kg, vinil.",date:"2026-04-10"},
-  // === BOLALAR ===
-  {id:70,name:"LEGO City Police Station",category:"kids",price:1899000,oldPrice:2399000,discount:21,image:"🚔",rating:4.8,reviews:78,sold:340,desc:"LEGO City Police Station, 1040 dona.",date:"2026-04-01"},
-  {id:71,name:"Nerf Elite 2.0 Blaster",category:"kids",price:459000,oldPrice:599000,discount:23,image:"🔫",rating:4.5,reviews:167,sold:1200,desc:"Nerf Elite 2.0 blaster, 15 o'qli, yuqori tezlik.",date:"2026-03-25"},
-  {id:72,name:"Fisher-Price Smart Phone",category:"kids",price:299000,oldPrice:399000,discount:25,image:"📱",rating:4.3,reviews:234,sold:2100,desc:"Fisher-Price o'quv telefoni, 1-3 yosh.",date:"2026-04-05"},
-  {id:73,name:"Hasbro Monopoly Classic",category:"kids",price:349000,oldPrice:449000,discount:22,image:"🎲",rating:4.6,reviews:189,sold:980,desc:"Hasbro Monopoly Classic stol o'yini.",date:"2026-03-30"},
-  // === KITOBLAR ===
-  {id:74,name:"Ikki Eshik Orasi - O'tkir Hoshimov",category:"books",price:89000,oldPrice:120000,discount:26,image:"📖",rating:4.7,reviews:345,sold:3200,desc:"O'tkir Hoshimovning mashhur romani, 416 bet.",date:"2026-04-01"},
-  {id:75,name:"Rich Dad Poor Dad (Uzbek)",category:"books",price:119000,oldPrice:159000,discount:25,image:"📚",rating:4.8,reviews:267,sold:2500,desc:"Robert Kiyosaki - moliyaviy mustaqillik haqida.",date:"2026-03-20"},
-  {id:76,name:"Python Dasturlash Asoslari",category:"books",price:149000,oldPrice:199000,discount:25,image:"🐍",rating:4.6,reviews:98,sold:780,desc:"Python dasturlash tili bo'yicha o'zbek tilidagi qo'llanma.",date:"2026-04-05"},
-  {id:77,name:"Sariq Devni Minib - Xudoyberdi To'xtaboyev",category:"books",price:75000,oldPrice:100000,discount:25,image:"📘",rating:4.9,reviews:412,sold:4500,desc:"Xudoyberdi To'xtaboyevning bolalar uchun qiziqarli asari.",date:"2026-03-15"},
-  {id:78,name:"O'tkan Kunlar - Abdulla Qodiriy",category:"books",price:99000,oldPrice:130000,discount:24,image:"📕",rating:4.8,reviews:567,sold:6000,desc:"Abdulla Qodiriyning o'zbek adabiyotining durdonasi.",date:"2026-01-10"},
-  // === OZIQ-OVQAT ===
-  {id:79,name:"Coca-Cola 2L",category:"food",price:18000,oldPrice:24000,discount:25,image:"🥤",rating:4.2,reviews:890,sold:12000,desc:"Coca-Cola 2 litr, shisha.",date:"2026-04-01"},
-  {id:80,name:"Milka Shokolad 200g",category:"food",price:45000,oldPrice:59000,discount:24,image:"🍫",rating:4.6,reviews:456,sold:5600,desc:"Milka shokolad, sutli, 200 gramm.",date:"2026-03-25"},
-  {id:81,name:"Lays Pringles 150g",category:"food",price:32000,oldPrice:42000,discount:24,image:"🥨",rating:4.3,reviews:678,sold:8900,desc:"Lays Pringles chipslari, 150 gramm.",date:"2026-04-05"},
-  {id:82,name:"Bon Aqua 1.5L",category:"food",price:14000,oldPrice:18000,discount:22,image:"💧",rating:4.1,reviews:1234,sold:15000,desc:"Bon Aqua gazsiz suv, 1.5 litr.",date:"2026-03-30"},
-  {id:83,name:"Nestle Zboj 700g",category:"food",price:89000,oldPrice:119000,discount:25,image:"🥣",rating:4.4,reviews:234,sold:3400,desc:"Nestle Zboj nonushta donasi, 700 gramm.",date:"2026-04-01"},
-  {id:84,name:"Mivelo 900ml Yog'",category:"food",price:26000,oldPrice:34000,discount:24,image:"🫒",rating:4.3,reviews:567,sold:7800,desc:"Mivelo kungaboqar yog'i, 900ml.",date:"2026-03-20"}
+
 ];let state = {
   products: [], cart: [], favorites: [], currentUser: null, orders: [],
   currentLang: 'uz', currentCategory: 'all', currentSort: 'default',
@@ -201,6 +178,9 @@ const LANGS = {
 
 function init() {
   loadState();
+  // Remove food, books, kids categories
+  state.products = state.products.filter(function(p){ return p.category!=='food' && p.category!=='books' && p.category!=='kids'; });
+  if (state.currentCategory==='food'||state.currentCategory==='books'||state.currentCategory==='kids') state.currentCategory='all';
   // Always use latest DEFAULT_PRODUCTS (merge with existing)
   var existingIds = {};
   state.products.forEach(function(p){ existingIds[p.id]=true; });
@@ -240,8 +220,7 @@ function renderQuickCategories() {
   const cats = [
     {id:'electronics',icon:'📱',uz:'Elektronika'},{id:'clothing',icon:'👕',uz:'Kiyim'},
     {id:'home',icon:'🏠',uz:'Uy'},{id:'beauty',icon:'💄',uz:"Go'zallik"},
-    {id:'sports',icon:'⚽',uz:'Sport'},{id:'kids',icon:'👶',uz:'Bolalar'},
-    {id:'books',icon:'📚',uz:'Kitoblar'},{id:'food',icon:'🍎',uz:'Oziq-ovqat'}
+    {id:'sports',icon:'⚽',uz:'Sport'}
   ];
   el.innerHTML = cats.map(c =>
     '<div class="quick-cat '+(state.currentCategory===c.id?'active':'')+'" onclick="filterByCategory(\''+c.id+'\')"><span class="quick-cat-icon">'+c.icon+'</span><span class="quick-cat-name">'+c.uz+'</span></div>'
@@ -250,26 +229,59 @@ function renderQuickCategories() {
 
 var PRODUCT_IMAGES = {
   1:'https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-15-pro-max-1.jpg',
-  3:'https://fdn2.gsmarena.com/vv/pics/apple/apple-macbook-air-m3-1.jpg',
-  4:'https://fdn2.gsmarena.com/vv/pics/apple/apple-airpods-pro-2-usbc-1.jpg',
+  2:'https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-s24-ultra-5g-sm-s928-stylus.jpg',
+  3:'https://www.apple.com/newsroom/images/2024/03/apple-unveils-the-new-13-and-15-inch-macbook-air-with-the-powerful-m3-chip/tile/Apple-MacBook-Air-2-up-hero-240304-lp.jpg.og.jpg',
+  4:'https://www.apple.com/newsroom/images/2023/09/apple-introduces-new-airpods-pro-2nd-generation/tile/Apple-AirPods-Pro-2nd-generation-USB-C-connection-230912.jpg.og.jpg',
   5:'https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/skwgyqrbfzhu6uyeh0gg/air-max-270-mens-shoes.png',
-  8:'https://upload.wikimedia.org/wikipedia/en/thumb/f/f3/TheAlchemistCover.jpg/440px-TheAlchemistCover.jpg',
+  6:'https://www.applianceretailer.com.au/wp-content/uploads/Dyson-V15-Detect_248P_RGB-PNG-1200x900-1.png',
   9:'https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/skwgyqrbfzhu6uyeh0gg/dri-fit-football-top.png',
   10:'https://www.laprairie.com/cdn/shop/files/95790-01379-45_SC_LuxeCream_50ml_packshot_C.png',
   11:'https://fdn2.gsmarena.com/vv/bigpic/xiaomi-redmi-note-13-pro.jpg',
+  12:'https://image.uniqlo.com/UQ/ST3/WesternCommon/imagesgoods/461003/item/goods_09_461003_3x4.jpg',
+  13:'https://www.ikea.com/us/en/images/products/kallax-shelf-unit-white__0627095_pe693171_s5.jpg',
+  14:'https://cdn11.bigcommerce.com/s-2idmiil7bp/images/stencil/1280x1280/products/1367/11214/00069055128893_C1C1_OOP_91434424__36874__52579.1781817167.jpg',
   17:'https://assets.adidas.com/images/w_800,f_auto,q_auto/8ed8700dd4404d45a899a22a25c7db84_9366/predator-elite-fold-over-tongue-firm-ground-cleats.jpg',
-  18:'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Uzbek_national_costume.jpg/640px-Uzbek_national_costume.jpg',
-  19:'https://www.jbl.com/dw/image/v2/AAUJ_PRD/on/demandware.static/-/Sites-masterCatalog_Harman/default/dw5c400a94/JBL_CHARGE5_HERO_GREY_0014_x1.png',
+  18:'https://upload.wikimedia.org/wikipedia/commons/6/6d/Uzbek_in_traditional_costume.jpg',
+  19:'https://d21buns5ku92am.cloudfront.net/68766/images/374622-JBL_CHARGE5_HERO_BLACK_0046_x1-2f03cb-original-1609760327.png',
   21:'https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-14.jpg',
+  22:'https://www.ikea.com/se/en/images/products/malm-bed-frame-high-white__0749130_pe745499_s5.jpg',
+  24:'https://cdn2.bigcommerce.com/server1600/7b135/products/5970/images/17942/612Zkt-zl5L._SX522___83504.1528305267.500.750.jpg?c=2',
+  26:'https://contents.mediadecathlon.com/p2832146/k$3c3e31a45d9d4cf34e02f795b2357573/yoga-foam-block-grey-kimjaly-8801393.jpg',
+  27:'https://lh3.googleusercontent.com/OQ5nGT5BDSMMgjqAjHSRyT-7MVzUCU6TpKQBb8GdhShe8ONEFNZ_i6fhQ9wZMorVBXDVdyETMor5rwM1boR6LgDzQbfSAS8xob8=s0',
+  28:'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600',
+  30:'https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_600,h_600/global/393153/03/fnd/AUS/fmt/png/RS-X-Efekt-Lux-Unisex-Sneakers',
   31:'https://fdn2.gsmarena.com/vv/pics/oppo/oppo-find-x7-ultra-1.jpg',
+  32:'https://static.zara.net/photos/assets/public/5342/afca/5f5a40d7a034/e093d19d134f/15056710202-p/w/750/15056710202-p.jpg',
   33:'https://www.philips-hue.com/dw/image/v2/ABAH_PRD/on/demandware.static/-/Sites-master-catalog/default/dw123456/hue-white-color-ambiance-starter-kit.png',
+  34:'https://m.media-amazon.com/images/I/61ZcEvobUmL._SX679_.jpg',
+  35:'https://contents.mediadecathlon.com/p2186155/890c5a0df11e590c1bb20b405060a5b0/p2186155.jpg',
   39:'https://dl.razerzone.com/src2/6128/6128-1-en-v2.png',
-  44:'https://www.crayola.com/-/media/Crayola/Products/Product%20Images/52/523280.jpg',
+  40:'https://static.zara.net/photos/assets/public/25c6/3229/3e2340c6983e/359a9abd06fb/12386720001-a2/w/750/12386720001-a2.jpg',
+  41:'https://my.cathayelectronic.com/cdn/shop/files/02_600x600_cfbbb534-4bd7-47af-b794-8e2f3e730ce7.jpg?v=1715993285&width=600',
+  42:'https://www.maybelline.com/-/media/project/loreal/brand-sites/maybelline/master/us/eye-makeup/mascara/lash-sensational/1349116_mny73100_mascara_lashsensational_veryblack_frtg_comp_v1_600x600.png',
+  43:'https://tennisshopen.se/images/zoom/shift2.png',
   47:'https://dlcdnwebimgs.asus.com/gain/EXVJVPBQW1CKHKL8',
+  48:'https://images.unsplash.com/photo-1598965675045-45c5e72c7d05?w=600',
+  50:'https://images.brownthomas.com/bta/2001080095_01.jpg',
+  51:'https://assets.adidas.com/images/w_600,f_auto,q_auto/80c93173768e4b1d97ed7efb7b2a2cd1_9366/adidas_Originals_Hoodie_Yellow_JD0713_01_laydown.jpg',
+  52:'https://images.unsplash.com/photo-1582552938357-32b906df40cb?w=600',
   53:'https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/skwgyqrbfzhu6uyeh0gg/nike-sportswear-futura-t-shirt.png',
+  54:'https://fragrancemarket.com/cdn/shop/files/gucci_flora_1.jpg',
+  55:'https://static.ftshp.digital/img/p/1/6/9/5/0/7/9/1695079.jpg',
   56:'https://i01.appmifile.com/webfile/globalimg/products/pc/mi-robot-vacuum/spec-vacuum01.png',
+  57:'https://www.ikea.com/se/en/images/products/billy-bookcase-white__0625599_pe692385_s5.jpg',
+  58:'https://shop.tefal.co.uk/media/catalog/product/l/8/l897sd74_13_piece_ingenio_emotion_stainless_steel_pan_set.jpg',
+  59:'https://media3.bosch-home.com/Images/1200x1200/1492832_SPS4HMI49G_global_rgb.png',
+  60:'https://odiluxecosmetics.com/wp-content/uploads/2022/12/EPIK2184.jpg',
+  61:'https://cdn11.bigcommerce.com/s-eqyuthk7ay/images/stencil/1280x1280/products/998/8495/lkj23__38966.1674438676.jpg?c=2',
+  62:'https://www.maybelline.com/-/media/project/loreal/brand-sites/maybelline/master/us/face-makeup/face-palettes/nyx-professional-makeup/1206593_nyx_sku_1_0.png',
+  63:'https://www.vichyusa.com/dw/image/v2/AANG_PRD/on/demandware.static/-/Sites-acd-vichy-master-catalog/default/dw7808800b/product/Mineral89NightCream/Mineral%2089%20Night%20Cream%20ATF/Vichy-Mineral-89-Night-Cream-Packshot-IMG1.jpg',
+  64:'https://www.philips.co.uk/c-p/S9982_54/shaver-series-9000-wet-and-dry-electric-shaver',
+  65:'https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_600,h_600/global/394528/01/fnd/AUS/fmt/png/Puma-Goal-L-Sport-Forma',
+  66:'https://www.spalding.com/dw/image/v2/BDCH_PRD/on/demandware.static/-/Sites-master/default/dw42b5b2d7/SPA0434_1.jpg',
   67:'https://www.jbl.com/dw/image/v2/BFND_PRD/on/demandware.static/-/Sites-masterCatalog_Harman/default/dw71954db1/1.JBL_ENDURANCE_PEAK_3_Product%20Image_Hero_Black.png',
-  75:'https://m.media-amazon.com/images/I/91VokXkn8hL._SL1500_.jpg'
+  68:'https://www.nicepng.com/png/full/287-2876285_the-nordictrack-commercial-1750-treadmill-nordictrack-commercial-1750.png',
+  69:'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?fm=jpg&q=60&w=3000&auto=format'
 };
 
 function getProductImageUrl(p) {
@@ -290,7 +302,7 @@ function renderStars(rating) {
 
 function getCategoryName(cat) {
   const t = LANGS[state.currentLang];
-  const map = {electronics:t.electronics,clothing:t.clothing,home:t.home,beauty:t.beauty,sports:t.sports,kids:t.kids,books:t.books,food:t.food};
+  const map = {electronics:t.electronics,clothing:t.clothing,home:t.home,beauty:t.beauty,sports:t.sports};
   return map[cat] || cat;
 }
 
@@ -394,7 +406,7 @@ function filterByCategory(cat) {
   // Update section title
   var titleEl = document.getElementById('sectionTitle');
   if (titleEl) {
-    var catNames = {all:LANGS[state.currentLang].all_products, electronics:LANGS[state.currentLang].electronics, clothing:LANGS[state.currentLang].clothing, home:LANGS[state.currentLang].home, beauty:LANGS[state.currentLang].beauty, sports:LANGS[state.currentLang].sports, kids:LANGS[state.currentLang].kids, books:LANGS[state.currentLang].books, food:LANGS[state.currentLang].food};
+    var catNames = {all:LANGS[state.currentLang].all_products, electronics:LANGS[state.currentLang].electronics, clothing:LANGS[state.currentLang].clothing, home:LANGS[state.currentLang].home, beauty:LANGS[state.currentLang].beauty, sports:LANGS[state.currentLang].sports};
     titleEl.textContent = catNames[cat] || cat;
   }
 }
@@ -881,7 +893,7 @@ function setLang(lang) {
   // Update section title
   var titleEl=document.getElementById('sectionTitle');
   if(titleEl) {
-    var catNames={all:LANGS[state.currentLang].all_products, electronics:LANGS[state.currentLang].electronics, clothing:LANGS[state.currentLang].clothing, home:LANGS[state.currentLang].home, beauty:LANGS[state.currentLang].beauty, sports:LANGS[state.currentLang].sports, kids:LANGS[state.currentLang].kids, books:LANGS[state.currentLang].books, food:LANGS[state.currentLang].food};
+    var catNames={all:LANGS[state.currentLang].all_products, electronics:LANGS[state.currentLang].electronics, clothing:LANGS[state.currentLang].clothing, home:LANGS[state.currentLang].home, beauty:LANGS[state.currentLang].beauty, sports:LANGS[state.currentLang].sports};
     titleEl.textContent=catNames[state.currentCategory]||state.currentCategory;
   }
 }
