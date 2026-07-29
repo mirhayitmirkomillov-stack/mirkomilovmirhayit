@@ -1,0 +1,162 @@
+﻿<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UzShop - Online Do'kon</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛍️</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo" onclick="goHome()">
+        <svg class="logo-svg" width="32" height="32" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="10" y="30" width="80" height="60" rx="8" fill="white"/>
+          <path d="M25 30C25 15 35 8 50 8C65 8 75 15 75 30" stroke="white" stroke-width="6" fill="none" stroke-linecap="round"/>
+          <circle cx="40" cy="55" r="5" fill="#7B2FF2"/>
+          <circle cx="60" cy="55" r="5" fill="#7B2FF2"/>
+          <path d="M40 70L50 80L60 70" stroke="#7B2FF2" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="logo-text">Uz<span class="logo-highlight">Shop</span></span>
+      </div>
+      <div class="search-box">
+        <input type="text" id="searchInput" data-i18n-placeholder="search" placeholder="Mahsulot qidirish...">
+        <button class="search-btn" onclick="searchProducts()">🔍</button>
+      </div>
+      <div class="header-actions">
+        <div class="lang-switcher">
+          <button onclick="setLang('uz')" class="lang-btn active" data-lang="uz">UZ</button>
+          <button onclick="setLang('ru')" class="lang-btn" data-lang="ru">RU</button>
+          <button onclick="setLang('en')" class="lang-btn" data-lang="en">EN</button>
+        </div>
+        <button class="header-btn" onclick="openModal('favoritesModal')" title="Sevimlilar"><span class="btn-icon">❤️</span><span class="badge" id="favCount">0</span></button>
+        <button class="header-btn" onclick="openModal('cartModal')" title="Savat"><span class="btn-icon">🛒</span><span class="badge" id="cartCount">0</span></button>
+        <button class="header-btn user-btn" onclick="openModal('authModal')" title="Profil"><span class="btn-icon">👤</span><span class="user-name" id="userName"></span></button>
+      </div>
+      <button class="mobile-menu-btn" onclick="toggleSidebar()">☰</button>
+    </div>
+  </header>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header"><span data-i18n="categories">Kategoriyalar</span><button class="sidebar-close" onclick="toggleSidebar()">✕</button></div>
+    <nav class="category-list" id="categoryList">
+      <button class="cat-btn active" data-category="all" onclick="filterByCategory('all')"><span>📦</span> <span data-i18n="all_products">Barcha mahsulotlar</span></button>
+      <button class="cat-btn" data-category="electronics" onclick="filterByCategory('electronics')"><span>📱</span> <span data-i18n="electronics">Elektronika</span></button>
+      <button class="cat-btn" data-category="clothing" onclick="filterByCategory('clothing')"><span>👕</span> <span data-i18n="clothing">Kiyim-kechak</span></button>
+      <button class="cat-btn" data-category="home" onclick="filterByCategory('home')"><span>🏠</span> <span data-i18n="home">Uy buyumlari</span></button>
+      <button class="cat-btn" data-category="beauty" onclick="filterByCategory('beauty')"><span>💄</span> <span data-i18n="beauty">Go'zallik</span></button>
+      <button class="cat-btn" data-category="sports" onclick="filterByCategory('sports')"><span>⚽</span> <span data-i18n="sports">Sport</span></button>
+      <button class="cat-btn" data-category="kids" onclick="filterByCategory('kids')"><span>👶</span> <span data-i18n="kids">Bolalar</span></button>
+      <button class="cat-btn" data-category="books" onclick="filterByCategory('books')"><span>📚</span> <span data-i18n="books">Kitoblar</span></button>
+      <button class="cat-btn" data-category="food" onclick="filterByCategory('food')"><span>🍎</span> <span data-i18n="food">Oziq-ovqat</span></button>
+    </nav>
+    <div class="sidebar-section">
+      <h4 data-i18n="price_range">Narx oralig'i</h4>
+      <div class="price-filter">
+        <input type="number" id="priceMin" placeholder="Min" min="0">
+        <span>—</span>
+        <input type="number" id="priceMax" placeholder="Max" min="0">
+        <button onclick="applyPriceFilter()">✓</button>
+      </div>
+    </div>
+    <div class="sidebar-section">
+      <h4 data-i18n="sort_by">Saralash</h4>
+      <select id="sortSelect" onchange="sortProducts(this.value)">
+        <option value="default">Standart</option>
+        <option value="price-asc">Narx (arzon → qimmat)</option>
+        <option value="price-desc">Narx (qimmat → arzon)</option>
+        <option value="rating">Reyting bo'yicha</option>
+        <option value="newest">Eng yangi</option>
+        <option value="popular">Mashhur</option>
+      </select>
+    </div>
+    <div class="sidebar-section sidebar-admin"><button class="admin-btn" onclick="openModal('adminModal')">⚙️ <span data-i18n="admin_panel">Admin panel</span></button></div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+  <main class="main-content" id="mainContent">
+    <section class="banner" id="banner"></section>
+    <section class="quick-categories" id="quickCategories"></section>
+    <section class="products-section">
+      <div class="section-header"><h2 id="sectionTitle" data-i18n="all_products">Barcha mahsulotlar</h2><span class="product-count" id="productCount"></span></div>
+      <div class="products-grid" id="productsGrid"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-col"><h3>🛍️ UzShop</h3><p>O'zbekistondagi eng ishonchli online do'kon</p></div>
+      <div class="footer-col"><h4>Foydali havolalar</h4><a href="#" onclick="goHome()">Bosh sahifa</a><a href="#" onclick="openModal('authModal')">Profil</a><a href="#" onclick="openModal('cartModal')">Savat</a></div>
+      <div class="footer-col"><h4>Aloqa</h4><p>📞 +998 99 083 09 38</p><p>📍 Hojakent, Uzbekistan</p></div>
+      <div class="footer-col"><h4>Ijtimoiy tarmoqlar</h4><div class="social-links"><a href="https://t.me/+998990830938" target="_blank">Telegram</a><a href="#" onclick="showToast('Tez orada')">Instagram</a><a href="#" onclick="showToast('Tez orada')">Facebook</a></div></div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 UzShop. Barcha huquqlar himoyalangan.</p></div>
+  </footer>
+
+  <!-- PRODUCT DETAIL -->
+  <div class="modal-overlay" id="productModal"><div class="modal product-detail-modal"><button class="modal-close" onclick="closeModal('productModal')">✕</button><div class="product-detail" id="productDetail"></div></div></div>
+  <!-- CART -->
+  <div class="modal-overlay" id="cartModal"><div class="modal cart-modal"><button class="modal-close" onclick="closeModal('cartModal')">✕</button><h2>🛒 Mening savatim</h2><div class="cart-items" id="cartItems"></div><div class="cart-footer" id="cartFooter"></div></div></div>
+  <!-- FAVORITES -->
+  <div class="modal-overlay" id="favoritesModal"><div class="modal favorites-modal"><button class="modal-close" onclick="closeModal('favoritesModal')">✕</button><h2>❤️ Sevimlilarim</h2><div class="favorites-items" id="favoritesItems"></div></div></div>
+  <!-- AUTH -->
+  <div class="modal-overlay" id="authModal">
+    <div class="modal auth-modal">
+      <button class="modal-close" onclick="closeModal('authModal')">✕</button>
+      <div class="auth-tabs"><button class="auth-tab active" onclick="switchAuthTab('login')">Kirish</button><button class="auth-tab" onclick="switchAuthTab('register')">Ro'yxatdan o'tish</button></div>
+      <form class="auth-form" id="loginForm" onsubmit="return handleLogin(event)"><div class="form-group"><label>Email</label><input type="email" id="loginEmail" required></div><div class="form-group"><label>Parol</label><input type="password" id="loginPassword" required></div><button type="submit" class="btn-primary">Kirish</button></form>
+      <form class="auth-form hidden" id="registerForm" onsubmit="return handleRegister(event)"><div class="form-group"><label>To'liq ism</label><input type="text" id="regName" required></div><div class="form-group"><label>Email</label><input type="email" id="regEmail" required></div><div class="form-group"><label>Telefon</label><input type="tel" id="regPhone" placeholder="+998 XX XXX XX XX"></div><div class="form-group"><label>Parol</label><input type="password" id="regPassword" required minlength="6"></div><button type="submit" class="btn-primary">Ro'yxatdan o'tish</button></form>
+      <div class="user-profile hidden" id="userProfile"><div class="profile-header"><div class="profile-avatar" id="profileAvatar">👤</div><h3 id="profileName"></h3><p id="profileEmail"></p></div><div class="profile-stats"><div class="stat"><span class="stat-value" id="profileOrders">0</span><span class="stat-label">Buyurtmalar</span></div><div class="stat"><span class="stat-value" id="profilePoints">0</span><span class="stat-label">Ballar</span></div><div class="stat"><span class="stat-value" id="profileSpent">0</span><span class="stat-label">Sarflangan</span></div></div><div class="profile-actions"><button onclick="openModal('orderHistoryModal');closeModal('authModal')">📦 Buyurtmalar tarixi</button><button class="btn-danger" onclick="handleLogout()">Chiqish</button></div></div>
+    </div>
+  </div>
+  <!-- ORDER -->
+  <div class="modal-overlay" id="orderModal">
+    <div class="modal order-modal">
+      <button class="modal-close" onclick="closeModal('orderModal')">✕</button>
+      <h2>📦 Buyurtma berish</h2>
+      <form class="order-form" id="orderForm" onsubmit="return handleOrder(event)">
+        <div class="order-summary" id="orderSummary"></div>
+        <div class="form-group"><label>Yetkazish manzili</label><input type="text" id="orderAddress" required placeholder="Shahar, ko'cha, uy"></div>
+        <div class="form-group"><label>Telefon</label><input type="tel" id="orderPhone" required placeholder="+998 XX XXX XX XX"></div>
+        <div class="form-group"><label>To'lov usuli</label><select id="orderPayment"><option value="cash">💵 Naqd pul</option><option value="card">💳 Plastik karta</option><option value="click">📱 Click</option><option value="payme">📱 Payme</option></select></div>
+        <div class="form-group" id="usePointsGroup" style="display:none"><label><input type="checkbox" id="usePoints"> Ballardan foydalanish (<span id="availablePoints">0</span> ball mavjud)</label></div>
+        <div class="order-total" id="orderTotal"></div>
+        <button type="submit" class="btn-primary btn-block">Buyurtmani tasdiqlash</button>
+      </form>
+    </div>
+  </div>
+  <!-- ORDER HISTORY -->
+  <div class="modal-overlay" id="orderHistoryModal"><div class="modal order-history-modal"><button class="modal-close" onclick="closeModal('orderHistoryModal')">✕</button><h2>📦 Buyurtmalar tarixi</h2><div class="order-history-list" id="orderHistoryList"></div></div></div>
+  <!-- ADMIN -->
+  <div class="modal-overlay" id="adminModal">
+    <div class="modal admin-modal">
+      <button class="modal-close" onclick="closeModal('adminModal')">✕</button>
+      <h2>⚙️ Admin panel</h2>
+      <div id="adminLogin"><div class="form-group"><label>Admin paroli</label><input type="password" id="adminPassword" placeholder="Parolni kiriting"></div><button class="btn-primary" onclick="adminLogin()">Kirish</button></div>
+      <div class="admin-content hidden" id="adminContent">
+        <div class="admin-tabs"><button class="admin-tab active" onclick="switchAdminTab('products',this)">Mahsulotlar</button><button class="admin-tab" onclick="switchAdminTab('orders',this)">Buyurtmalar</button></div>
+        <div class="admin-tab-content" id="adminProducts">
+          <h3>+ Yangi mahsulot qo'shish</h3>
+          <form class="admin-product-form" onsubmit="return addProduct(event)">
+            <div class="form-row"><div class="form-group"><label>Nomi</label><input type="text" id="pName" required></div><div class="form-group"><label>Narxi (so'm)</label><input type="number" id="pPrice" required min="0"></div></div>
+            <div class="form-row"><div class="form-group"><label>Kategoriya</label><select id="pCategory" required><option value="electronics">📱 Elektronika</option><option value="clothing">👕 Kiyim</option><option value="home">🏠 Uy</option><option value="beauty">💄 Go'zallik</option><option value="sports">⚽ Sport</option><option value="kids">👶 Bolalar</option><option value="books">📚 Kitoblar</option><option value="food">🍎 Oziq-ovqat</option></select></div><div class="form-group"><label>Chegirma %</label><input type="number" id="pDiscount" min="0" max="90" value="0"></div></div>
+            <div class="form-group"><label>Rasm URL</label><input type="url" id="pImage" placeholder="https://..."></div>
+            <div class="form-group"><label>Tavsif</label><textarea id="pDesc" rows="3"></textarea></div>
+            <button type="submit" class="btn-primary">Qo'shish</button>
+          </form>
+          <div class="admin-product-list" id="adminProductList"></div>
+        </div>
+        <div class="admin-tab-content hidden" id="adminOrders"><div class="admin-orders-list" id="adminOrdersList"></div></div>
+      </div>
+    </div>
+  </div>
+  <!-- SUCCESS -->
+  <div class="modal-overlay" id="successModal"><div class="modal success-modal"><div class="success-icon">✅</div><h2>Buyurtma muvaffaqiyatli qabul qilindi!</h2><p>Tez orada siz bilan bog'lanamiz.</p><button class="btn-primary" onclick="closeModal('successModal')">Xaridni davom ettirish</button></div></div>
+
+  <div class="toast" id="toast"></div>
+  <button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+  <script src="java.js"></script>
+</body>
+</html>
