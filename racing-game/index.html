@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Turbo Road — Poyga o'yini | Mirhayit Games</title>
+  <meta name="description" content="Turbo Road — cheksiz mashina poygasi. To'siqlardan qoching, maksimal tezlikka erishing!">
+  <meta name="theme-color" content="#0b0c16">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="game-shell">
+    <canvas id="gameCanvas"></canvas>
+
+    <div class="hud">
+      <div class="hud-item">
+        <span class="hud-label">BALL</span>
+        <span class="hud-value" id="scoreVal">0</span>
+      </div>
+      <div class="hud-item hud-speed">
+        <span class="hud-value" id="speedVal">0</span>
+        <span class="hud-label">KM/H</span>
+      </div>
+      <div class="hud-item hud-right">
+        <span class="hud-label">TOP</span>
+        <span class="hud-value" id="hiScoreVal">0</span>
+      </div>
+    </div>
+
+    <div class="pause-btn" id="pauseBtn">II</div>
+
+    <div class="start-screen" id="startScreen">
+      <h1 class="logo">TURBO <span>ROAD</span></h1>
+      <p class="sub">Cheksiz poygada to'siqlardan qoching!</p>
+      <div class="start-btn" id="startBtn">O'YINNI BOSHLASH</div>
+      <p class="hint">Mashinani barmoq bilan surib boshqaring</p>
+    </div>
+
+    <div class="game-over-screen" id="gameOverScreen" style="display:none">
+      <h2 class="go-title">GAME OVER</h2>
+      <p class="go-score">Ball: <span id="finalScore">0</span></p>
+      <p class="go-best">Eng yaxshi: <span id="finalBest">0</span></p>
+      <div class="restart-btn" id="restartBtn">QAYTADAN</div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+  </div>
+
+  <script src="game.js" defer></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
+    }
+  </script>
+</body>
+</html>
