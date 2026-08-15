@@ -3,7 +3,7 @@ name: UzShop-ni GitHub Pages-ga yuklash
 on:
   push:
     branches: [master]
-    paths: ['1sayt/**']
+    paths: ['1sayt/**', 'racing-game/**']
 
 jobs:
   deploy:
@@ -16,9 +16,16 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+
+      - name: Sayt va o'yinni tayyorlash
+        run: |
+          mkdir -p public
+          cp -r 1sayt/* public/
+          cp -r racing-game public/racing-game
+
       - uses: actions/configure-pages@v4
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: 1sayt
+          path: public
       - uses: actions/deploy-pages@v4
         id: deployment
