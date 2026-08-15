@@ -3,7 +3,7 @@ name: UzShop-ni GitHub Pages-ga yuklash
 on:
   push:
     branches: [master]
-    paths: ['1sayt/**', 'racing-game/**']
+    paths: ['1sayt/**', 'racing-game/**', '.github/workflows/**']
 
 jobs:
   deploy:
