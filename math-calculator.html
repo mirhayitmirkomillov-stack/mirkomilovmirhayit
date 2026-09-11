@@ -1,0 +1,1838 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matematik Kalkulyator</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6c5ce7;
+            --primary-dark: #5a4bd1;
+            --secondary: #00cec9;
+            --accent: #fd79a8;
+            --bg-dark: #0a0a1a;
+            --bg-card: #12122a;
+            --bg-button: #1e1e3f;
+            --bg-button-hover: #2a2a5a;
+            --text: #ffffff;
+            --text-dim: #a0a0c0;
+            --success: #00b894;
+            --warning: #fdcb6e;
+            --danger: #e17055;
+            --gradient-1: linear-gradient(135deg, #6c5ce7, #a29bfe);
+            --gradient-2: linear-gradient(135deg, #00cec9, #55efc4);
+            --gradient-3: linear-gradient(135deg, #fd79a8, #e84393);
+            --shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            --shadow-glow: 0 0 30px rgba(108, 92, 231, 0.3);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .bg-animation .circle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.05;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .bg-animation .circle:nth-child(1) {
+            width: 400px;
+            height: 400px;
+            background: var(--primary);
+            top: -100px;
+            right: -100px;
+            animation-delay: 0s;
+        }
+
+        .bg-animation .circle:nth-child(2) {
+            width: 300px;
+            height: 300px;
+            background: var(--secondary);
+            bottom: -50px;
+            left: -50px;
+            animation-delay: 5s;
+        }
+
+        .bg-animation .circle:nth-child(3) {
+            width: 200px;
+            height: 200px;
+            background: var(--accent);
+            top: 50%;
+            left: 50%;
+            animation-delay: 10s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(50px, -50px) scale(1.1); }
+            50% { transform: translate(-30px, 30px) scale(0.9); }
+            75% { transform: translate(20px, 50px) scale(1.05); }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 0 20px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 5px;
+        }
+
+        header p {
+            color: var(--text-dim);
+            font-size: 0.95rem;
+        }
+
+        .grade-selector {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .grade-btn {
+            padding: 8px 18px;
+            border: 2px solid transparent;
+            border-radius: 25px;
+            background: var(--bg-button);
+            color: var(--text-dim);
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .grade-btn:hover {
+            border-color: var(--primary);
+            color: var(--text);
+            transform: translateY(-2px);
+        }
+
+        .grade-btn.active {
+            background: var(--gradient-1);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 5px 20px rgba(108, 92, 231, 0.4);
+        }
+
+        .topic-tabs {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+            padding-bottom: 5px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary) transparent;
+        }
+
+        .topic-tabs::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        .topic-tabs::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 10px;
+        }
+
+        .topic-tab {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 12px;
+            background: var(--bg-button);
+            color: var(--text-dim);
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .topic-tab:hover {
+            background: var(--bg-button-hover);
+            color: var(--text);
+        }
+
+        .topic-tab.active {
+            background: var(--secondary);
+            color: var(--bg-dark);
+            font-weight: 600;
+        }
+
+        .calculator-card {
+            background: var(--bg-card);
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(108, 92, 231, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .input-section {
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+
+        .input-group input, .input-group select, .input-group textarea {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid rgba(108, 92, 231, 0.2);
+            border-radius: 14px;
+            background: var(--bg-button);
+            color: var(--text);
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .input-group textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        .input-group input:focus, .input-group select:focus, .input-group textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 20px rgba(108, 92, 231, 0.2);
+        }
+
+        .input-group input::placeholder, .input-group textarea::placeholder {
+            color: rgba(160, 160, 192, 0.5);
+        }
+
+        .input-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .solve-btn {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 14px;
+            background: var(--gradient-1);
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .solve-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(108, 92, 231, 0.4);
+        }
+
+        .solve-btn:active {
+            transform: translateY(0);
+        }
+
+        .solve-btn .icon {
+            font-size: 1.3rem;
+        }
+
+        .result-section {
+            display: none;
+            margin-top: 25px;
+            animation: slideUp 0.5s ease;
+        }
+
+        .result-section.show {
+            display: block;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .result-card {
+            background: linear-gradient(135deg, rgba(0, 184, 148, 0.1), rgba(0, 206, 201, 0.1));
+            border: 1px solid rgba(0, 184, 148, 0.3);
+            border-radius: 16px;
+            padding: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .result-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--gradient-2);
+        }
+
+        .result-label {
+            font-size: 0.8rem;
+            color: var(--secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .result-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text);
+            word-break: break-all;
+        }
+
+        .result-steps {
+            margin-top: 20px;
+        }
+
+        .result-steps h3 {
+            font-size: 1rem;
+            color: var(--secondary);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .step {
+            background: var(--bg-button);
+            border-radius: 10px;
+            padding: 12px 16px;
+            margin-bottom: 8px;
+            border-left: 3px solid var(--primary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .step .step-num {
+            display: inline-block;
+            width: 22px;
+            height: 22px;
+            background: var(--gradient-1);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 22px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-right: 8px;
+        }
+
+        .quick-math {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .quick-math button {
+            padding: 12px 8px;
+            border: none;
+            border-radius: 10px;
+            background: var(--bg-button);
+            color: var(--text);
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .quick-math button:hover {
+            background: var(--bg-button-hover);
+            transform: scale(1.05);
+        }
+
+        .quick-math button:active {
+            transform: scale(0.95);
+        }
+
+        .quick-math button.operator {
+            background: var(--primary-dark);
+            color: white;
+        }
+
+        .quick-math button.special {
+            background: var(--accent);
+            color: white;
+        }
+
+        .quick-math button.equals {
+            background: var(--success);
+            color: white;
+            grid-column: span 2;
+        }
+
+        .history-section {
+            margin-top: 20px;
+        }
+
+        .history-title {
+            font-size: 1rem;
+            color: var(--text-dim);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .clear-history {
+            background: none;
+            border: none;
+            color: var(--danger);
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.8rem;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .history-list {
+            max-height: 200px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary) transparent;
+        }
+
+        .history-item {
+            background: var(--bg-button);
+            border-radius: 10px;
+            padding: 10px 14px;
+            margin-bottom: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .history-item:hover {
+            background: var(--bg-button-hover);
+        }
+
+        .history-item .expr {
+            color: var(--text-dim);
+            flex: 1;
+        }
+
+        .history-item .ans {
+            color: var(--success);
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        .formula-reference {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 20px;
+            margin-top: 20px;
+            border: 1px solid rgba(108, 92, 231, 0.1);
+        }
+
+        .formula-reference h3 {
+            font-size: 1rem;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .formula-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 8px;
+        }
+
+        .formula-item {
+            background: var(--bg-button);
+            border-radius: 8px;
+            padding: 10px 12px;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+        }
+
+        .formula-item strong {
+            color: var(--text);
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .section-title {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(108, 92, 231, 0.1);
+        }
+
+        .multi-input {
+            display: grid;
+            gap: 10px;
+        }
+
+        .multi-input.row-2 { grid-template-columns: 1fr 1fr; }
+        .multi-input.row-3 { grid-template-columns: 1fr 1fr 1fr; }
+
+        .multi-input .input-group {
+            margin-bottom: 0;
+        }
+
+        .template-text {
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            margin-top: 3px;
+            opacity: 0.7;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            color: var(--text-dim);
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 10px; }
+            header h1 { font-size: 1.8rem; }
+            .calculator-card { padding: 20px; }
+            .input-row, .multi-input.row-2, .multi-input.row-3 {
+                grid-template-columns: 1fr;
+            }
+            .quick-math {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            .result-value { font-size: 1.3rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>Matematik Kalkulyator</h1>
+            <p>Har qanday matematik masalani yeching</p>
+        </header>
+
+        <div class="grade-selector">
+            <button class="grade-btn active" onclick="setGrade(1-4, this)">1-4 sinf</button>
+            <button class="grade-btn" onclick="setGrade(5-6, this)">5-6 sinf</button>
+            <button class="grade-btn" onclick="setGrade(7-9, this)">7-9 sinf</button>
+            <button class="grade-btn" onclick="setGrade(10-11, this)">10-11 sinf</button>
+        </div>
+
+        <div class="topic-tabs" id="topicTabs">
+            <!-- Dynamically filled -->
+        </div>
+
+        <div class="calculator-card">
+            <!-- BASIC OPERATIONS -->
+            <div id="topic-basic" class="topic-content">
+                <p class="section-title">Amallarni bajarish</p>
+                <div class="input-group">
+                    <label>Ifoda</label>
+                    <input type="text" id="basicInput" placeholder="Masalan: 2 + 3 * 4" onkeydown="if(event.key==='Enter')solveBasic()">
+                </div>
+                <div class="quick-math">
+                    <button onclick="addChar('0')">0</button>
+                    <button onclick="addChar('1')">1</button>
+                    <button onclick="addChar('2')">2</button>
+                    <button onclick="addChar('3')">3</button>
+                    <button onclick="addChar('4')">4</button>
+                    <button onclick="addChar('5')">5</button>
+                    <button onclick="addChar('6')">6</button>
+                    <button onclick="addChar('7')">7</button>
+                    <button onclick="addChar('8')">8</button>
+                    <button onclick="addChar('9')">9</button>
+                    <button onclick="addChar('+')" class="operator">+</button>
+                    <button onclick="addChar('-')" class="operator">−</button>
+                    <button onclick="addChar('*')" class="operator">×</button>
+                    <button onclick="addChar('/')" class="operator">÷</button>
+                    <button onclick="addChar('(')">(</button>
+                    <button onclick="addChar(')')">)</button>
+                    <button onclick="addChar('.')" class="special">.</button>
+                    <button onclick="addChar('^')" class="special">^</button>
+                    <button onclick="clearInput()" class="special">C</button>
+                    <button onclick="backspace()" class="special">⌫</button>
+                    <button onclick="solveBasic()" class="equals">= Hisoblash</button>
+                </div>
+            </div>
+
+            <!-- FRACTIONS -->
+            <div id="topic-fraction" class="topic-content hidden">
+                <p class="section-title">Kasrlar bilan amallar</p>
+                <div class="multi-input row-3">
+                    <div class="input-group">
+                        <label>Birinchi kasr (a/b)</label>
+                        <input type="text" id="frac1" placeholder="3/4">
+                    </div>
+                    <div class="input-group">
+                        <label>Amal</label>
+                        <select id="fracOp">
+                            <option value="+">+</option>
+                            <option value="-">−</option>
+                            <option value="*">×</option>
+                            <option value="/">÷</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>Ikkinchi kasr (c/d)</label>
+                        <input type="text" id="frac2" placeholder="2/5">
+                    </div>
+                </div>
+                <button class="solve-btn" onclick="solveFraction()"><span class="icon">🧮</span> Hisoblash</button>
+            </div>
+
+            <!-- PERCENTAGE -->
+            <div id="topic-percent" class="topic-content hidden">
+                <p class="section-title">Foiz hisoblari</p>
+                <div class="multi-input row-3">
+                    <div class="input-group">
+                        <label>Son</label>
+                        <input type="number" id="percentVal" placeholder="250">
+                    </div>
+                    <div class="input-group">
+                        <label>Foiz (%)</label>
+                        <input type="number" id="percentOf" placeholder="20">
+                    </div>
+                    <div class="input-group">
+                        <label>Amal</label>
+                        <select id="percentType">
+                            <option value="of">% ni topish</option>
+                            <option value="increase">% ga oshirish</option>
+                            <option value="decrease">% ga kamaytirish</option>
+                            <option value="reverse">Asl sonni topish</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="solve-btn" onclick="solvePercent()"><span class="icon">📊</span> Hisoblash</button>
+            </div>
+
+            <!-- SQUARE ROOT -->
+            <div id="topic-sqrt" class="topic-content hidden">
+                <p class="section-title">Kvadrat va kub ildiz</p>
+                <div class="input-row">
+                    <div class="input-group">
+                        <label>Son</label>
+                        <input type="number" id="sqrtVal" placeholder="144">
+                    </div>
+                    <div class="input-group">
+                        <label>Ildiz darajasi</label>
+                        <select id="sqrtType">
+                            <option value="2">Kvadrat ildiz (√)</option>
+                            <option value="3">Kub ildiz (∛)</option>
+                            <option value="n">Boshqa daraja</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="input-group hidden" id="sqrtNGroup">
+                    <label>Ildiz darajasi</label>
+                    <input type="number" id="sqrtN" placeholder="4" min="2">
+                </div>
+                <button class="solve-btn" onclick="solveSqrt()"><span class="icon">√</span> Hisoblash</button>
+            </div>
+
+            <!-- POWER -->
+            <div id="topic-power" class="topic-content hidden">
+                <p class="section-title">Darajaga ko'tarish</p>
+                <div class="input-row">
+                    <div class="input-group">
+                        <label>Asos</label>
+                        <input type="number" id="powerBase" placeholder="5">
+                    </div>
+                    <div class="input-group">
+                        <label>Daraja</label>
+                        <input type="number" id="powerExp" placeholder="3">
+                    </div>
+                </div>
+                <button class="solve-btn" onclick="solvePower()"><span class="icon">⬆</span> Hisoblash</button>
+            </div>
+
+            <!-- QUADRATIC EQUATION -->
+            <div id="topic-quadratic" class="topic-content hidden">
+                <p class="section-title">Kvadrat tenglama: ax² + bx + c = 0</p>
+                <div class="multi-input row-3">
+                    <div class="input-group">
+                        <label>a</label>
+                        <input type="number" id="quadA" placeholder="1">
+                    </div>
+                    <div class="input-group">
+                        <label>b</label>
+                        <input type="number" id="quadB" placeholder="-5">
+                    </div>
+                    <div class="input-group">
+                        <label>c</label>
+                        <input type="number" id="quadC" placeholder="6">
+                    </div>
+                </div>
+                <button class="solve-btn" onclick="solveQuadratic()"><span class="icon">📐</span> Yechish</button>
+            </div>
+
+            <!-- SYSTEM OF EQUATIONS -->
+            <div id="topic-system" class="topic-content hidden">
+                <p class="section-title">Tenglamalar sistemasini yechish</p>
+                <p style="font-size:0.8rem;color:var(--text-dim);margin-bottom:10px;">ax + by = c formatida ikkita tenglama</p>
+                <div class="multi-input row-3">
+                    <div class="input-group"><label>a₁</label><input type="number" id="sysA1" placeholder="2"></div>
+                    <div class="input-group"><label>b₁</label><input type="number" id="sysB1" placeholder="3"></div>
+                    <div class="input-group"><label>c₁</label><input type="number" id="sysC1" placeholder="8"></div>
+                </div>
+                <div class="multi-input row-3" style="margin-top:8px;">
+                    <div class="input-group"><label>a₂</label><input type="number" id="sysA2" placeholder="1"></div>
+                    <div class="input-group"><label>b₂</label><input type="number" id="sysB2" placeholder="-1"></div>
+                    <div class="input-group"><label>c₂</label><input type="number" id="sysC2" placeholder="1"></div>
+                </div>
+                <button class="solve-btn" onclick="solveSystem()"><span class="icon">🔀</span> Yechish</button>
+            </div>
+
+            <!-- LINEAR EQUATION -->
+            <div id="topic-linear" class="topic-content hidden">
+                <p class="section-title">Chiziqli tenglama: ax + b = 0</p>
+                <div class="input-row">
+                    <div class="input-group"><label>a</label><input type="number" id="linA" placeholder="3"></div>
+                    <div class="input-group"><label>b</label><input type="number" id="linB" placeholder="-12"></div>
+                </div>
+                <button class="solve-btn" onclick="solveLinear()"><span class="icon">📏</span> Yechish</button>
+            </div>
+
+            <!-- SEQUENCE -->
+            <div id="topic-sequence" class="topic-content hidden">
+                <p class="section-title">Aritmetik va geometrik progressiya</p>
+                <div class="multi-input row-3">
+                    <div class="input-group">
+                        <label>Birinchi a'zo (a₁)</label>
+                        <input type="number" id="seqA1" placeholder="2">
+                    </div>
+                    <div class="input-group">
+                        <label>Umumiy farq / nisbat</label>
+                        <input type="number" id="seqD" placeholder="3">
+                    </div>
+                    <div class="input-group">
+                        <label>Nechinchi a'zo</label>
+                        <input type="number" id="seqN" placeholder="10">
+                    </div>
+                </div>
+                <div class="input-row" style="margin-top:8px;">
+                    <div class="input-group">
+                        <label>Turi</label>
+                        <select id="seqType">
+                            <option value="arithmetic">Aritmetik progressiya</option>
+                            <option value="geometric">Geometrik progressiya</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>Hisoblash</label>
+                        <select id="seqCalc">
+                            <option value="nth">N-chi a'zo</option>
+                            <option value="sum">Summa (Sₙ)</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="solve-btn" onclick="solveSequence()"><span class="icon">📈</span> Hisoblash</button>
+            </div>
+
+            <!-- TRIGONOMETRY -->
+            <div id="topic-trig" class="topic-content hidden">
+                <p class="section-title">Trigonometrik funksiyalar</p>
+                <div class="input-row">
+                    <div class="input-group">
+                        <label>Qiymat</label>
+                        <input type="number" id="trigVal" placeholder="30" step="any">
+                    </div>
+                    <div class="input-group">
+                        <label>Birlik</label>
+                        <select id="trigUnit">
+                            <option value="deg">Gradus (°)</option>
+                            <option value="rad">Radyan (rad)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="input-group" style="margin-top:8px;">
+                    <label>Funksiya</label>
+                    <select id="trigFunc">
+                        <option value="sin">sin</option>
+                        <option value="cos">cos</option>
+                        <option value="tan">tan</option>
+                        <option value="asin">arcsin</option>
+                        <option value="acos">arccos</option>
+                        <option value="atan">arctan</option>
+                    </select>
+                </div>
+                <button class="solve-btn" onclick="solveTrig()"><span class="icon">📏</span> Hisoblash</button>
+            </div>
+
+            <!-- FACTORIAL -->
+            <div id="topic-factorial" class="topic-content hidden">
+                <p class="section-title">Faktorial va kombinatorika</p>
+                <div class="input-row">
+                    <div class="input-group">
+                        <label>Son (n)</label>
+                        <input type="number" id="factN" placeholder="10" min="0" max="170">
+                    </div>
+                    <div class="input-group">
+                        <label>Amal</label>
+                        <select id="factType">
+                            <option value="factorial">Faktorial (n!)</option>
+                            <option value="perm">Permutatsiya P(n,k)</option>
+                            <option value="comb">Kombinatsiya C(n,k)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="input-group hidden" id="factKGroup" style="margin-top:8px;">
+                    <label>k</label>
+                    <input type="number" id="factK" placeholder="3" min="0">
+                </div>
+                <button class="solve-btn" onclick="solveFactorial()"><span class="icon">🎲</span> Hisoblash</button>
+            </div>
+
+            <!-- GEOMETRY -->
+            <div id="topic-geometry" class="topic-content hidden">
+                <p class="section-title">Geometrik shakllar</p>
+                <div class="input-group">
+                    <label>Shakl turini tanlang</label>
+                    <select id="geoShape" onchange="updateGeoInputs()">
+                        <option value="circle">Doira</option>
+                        <option value="rectangle">To'rtburchak</option>
+                        <option value="triangle">Uchburchak</option>
+                        <option value="trapezoid">Trapeziya</option>
+                        <option value="sphere">Sharcha</option>
+                        <option value="cylinder">Silindr</option>
+                        <option value="cone">Konus</option>
+                    </select>
+                </div>
+                <div id="geoInputs" class="multi-input row-3" style="margin-top:12px;">
+                    <!-- Dynamic -->
+                </div>
+                <div class="input-group" style="margin-top:8px;">
+                    <label>Hisoblash</label>
+                    <select id="geoCalc" onchange="updateGeoInputs()">
+                        <option value="area">Yuza (S)</option>
+                        <option value="perimeter">Perimetr (P)</option>
+                        <option value="volume">Hajm (V)</option>
+                    </select>
+                </div>
+                <button class="solve-btn" onclick="solveGeometry()"><span class="icon">📐</span> Hisoblash</button>
+            </div>
+
+            <!-- STATISTICS -->
+            <div id="topic-stats" class="topic-content hidden">
+                <p class="section-title">Statistika</p>
+                <div class="input-group">
+                    <label>Sonlarni vergul bilan ajrating</label>
+                    <textarea id="statsData" placeholder="Masalan: 12, 15, 18, 22, 25, 30, 35"></textarea>
+                </div>
+                <button class="solve-btn" onclick="solveStats()"><span class="icon">📊</span> Hisoblash</button>
+            </div>
+
+            <!-- MODULAR ARITHMETIC -->
+            <div id="topic-mod" class="topic-content hidden">
+                <p class="section-title">Modul arifmetikasi</p>
+                <div class="multi-input row-3">
+                    <div class="input-group"><label>Son (a)</label><input type="number" id="modA" placeholder="17"></div>
+                    <div class="input-group"><label>Modul (m)</label><input type="number" id="modM" placeholder="5"></div>
+                    <div class="input-group">
+                        <label>Amal</label>
+                        <select id="modType">
+                            <option value="mod">a mod m</option>
+                            <option value="gcd">EKUB (a, m)</option>
+                            <option value="lcm">EKUK [a, m]</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="solve-btn" onclick="solveMod()"><span class="icon">🔄</span> Hisoblash</button>
+            </div>
+
+            <!-- RESULT AREA -->
+            <div class="result-section" id="resultSection">
+                <div class="result-card">
+                    <div class="result-label">Natija</div>
+                    <div class="result-value" id="resultValue"></div>
+                </div>
+                <div class="result-steps" id="resultSteps"></div>
+            </div>
+        </div>
+
+        <div class="history-section">
+            <div class="history-title">
+                <span>Hisob-kitob tarixi</span>
+                <button class="clear-history" onclick="clearHistory()">Tozalash</button>
+            </div>
+            <div class="history-list" id="historyList">
+                <p style="color:var(--text-dim);font-size:0.8rem;text-align:center;padding:20px;">Hali hisob-kitob yo'q</p>
+            </div>
+        </div>
+
+        <div class="formula-reference">
+            <h3>Foydali formulalar</h3>
+            <div class="formula-grid" id="formulaGrid">
+                <div class="formula-item"><strong>Kvadrat tenglama</strong>x = (-b ± √(b²-4ac)) / 2a</div>
+                <div class="formula-item"><strong>Doira yuza</strong>S = πr²</div>
+                <div class="formula-item"><strong>Doira uzunlik</strong>L = 2πr</div>
+                <div class="formula-item"><strong>Uchburchak yuza</strong>S = ½ × a × h</div>
+                <div class="formula-item"><strong>Pythagoras</strong>a² + b² = c²</div>
+                <div class="formula-item"><strong>Pitagor teoremasi</strong>c = √(a² + b²)</div>
+            </div>
+        </div>
+
+        <footer>
+            Matematik Kalkulyator — Barcha huquqlar himoyalangan
+        </footer>
+    </div>
+
+    <script>
+        let currentGrade = '1-4';
+        let currentTopic = 'basic';
+        let history = [];
+
+        const gradeTopics = {
+            '1-4': [
+                { id: 'basic', name: 'Amallar' },
+                { id: 'fraction', name: 'Kasrlar' },
+                { id: 'percent', name: 'Foiz' },
+                { id: 'power', name: 'Daraja' },
+                { id: 'sqrt', name: 'Ildiz' }
+            ],
+            '5-6': [
+                { id: 'basic', name: 'Amallar' },
+                { id: 'fraction', name: 'Kasrlar' },
+                { id: 'percent', name: 'Foiz' },
+                { id: 'power', name: 'Daraja' },
+                { id: 'sqrt', name: 'Ildiz' },
+                { id: 'linear', name: 'Tenglamalar' },
+                { id: 'geometry', name: 'Geometriya' }
+            ],
+            '7-9': [
+                { id: 'basic', name: 'Amallar' },
+                { id: 'fraction', name: 'Kasrlar' },
+                { id: 'percent', name: 'Foiz' },
+                { id: 'quadratic', name: 'Kvadrat tenglama' },
+                { id: 'system', name: 'Tenglamalar sist.' },
+                { id: 'linear', name: 'Chiziqli tenglama' },
+                { id: 'sqrt', name: 'Ildiz' },
+                { id: 'trig', name: 'Trigonometriya' },
+                { id: 'stats', name: 'Statistika' },
+                { id: 'geometry', name: 'Geometriya' }
+            ],
+            '10-11': [
+                { id: 'basic', name: 'Amallar' },
+                { id: 'fraction', name: 'Kasrlar' },
+                { id: 'quadratic', name: 'Kvadrat tenglama' },
+                { id: 'system', name: 'Tenglamalar sist.' },
+                { id: 'linear', name: 'Chiziqli tenglama' },
+                { id: 'power', name: 'Daraja' },
+                { id: 'sqrt', name: 'Ildiz' },
+                { id: 'trig', name: 'Trigonometriya' },
+                { id: 'factorial', name: 'Faktorial' },
+                { id: 'sequence', name: 'Progressiya' },
+                { id: 'mod', name: 'Modul arifm.' },
+                { id: 'geometry', name: 'Geometriya' },
+                { id: 'stats', name: 'Statistika' }
+            ]
+        };
+
+        function setGrade(grade, el) {
+            currentGrade = grade;
+            document.querySelectorAll('.grade-btn').forEach(b => b.classList.remove('active'));
+            el.classList.add('active');
+            renderTopics();
+        }
+
+        function renderTopics() {
+            const tabs = document.getElementById('topicTabs');
+            const topics = gradeTopics[currentGrade];
+            tabs.innerHTML = '';
+            topics.forEach((t, i) => {
+                const btn = document.createElement('button');
+                btn.className = 'topic-tab' + (i === 0 ? ' active' : '');
+                btn.textContent = t.name;
+                btn.onclick = () => switchTopic(t.id, btn);
+                tabs.appendChild(btn);
+            });
+            switchTopic(topics[0].id);
+        }
+
+        function switchTopic(id, btn) {
+            currentTopic = id;
+            document.querySelectorAll('.topic-tab').forEach(b => b.classList.remove('active'));
+            if (btn) btn.classList.add('active');
+            else document.querySelector('.topic-tab')?.classList.add('active');
+            document.querySelectorAll('.topic-content').forEach(c => c.classList.add('hidden'));
+            const el = document.getElementById('topic-' + id);
+            if (el) el.classList.remove('hidden');
+            document.getElementById('resultSection').classList.remove('show');
+            if (id === 'geometry') updateGeoInputs();
+            if (id === 'factorial') {
+                document.getElementById('factType').onchange();
+            }
+        }
+
+        // Show/hide k input for factorial
+        document.getElementById('factType').addEventListener('change', function() {
+            const show = this.value !== 'factorial';
+            document.getElementById('factKGroup').classList.toggle('hidden', !show);
+        });
+
+        // Show/hide n input for sqrt
+        document.getElementById('sqrtType').addEventListener('change', function() {
+            document.getElementById('sqrtNGroup').classList.toggle('hidden', this.value !== 'n');
+        });
+
+        function addChar(c) {
+            const inp = document.getElementById('basicInput');
+            if (c === '*') c = '*';
+            if (c === '/') c = '/';
+            if (c === '^') c = '^';
+            inp.value += c;
+        }
+
+        function clearInput() {
+            document.getElementById('basicInput').value = '';
+        }
+
+        function backspace() {
+            const inp = document.getElementById('basicInput');
+            inp.value = inp.value.slice(0, -1);
+        }
+
+        function showResult(value, steps) {
+            document.getElementById('resultValue').innerHTML = value;
+            const stepsDiv = document.getElementById('resultSteps');
+            if (steps && steps.length > 0) {
+                stepsDiv.innerHTML = '<h3>📊 Yechim bosqichlari</h3>' +
+                    steps.map((s, i) => `<div class="step"><span class="step-num">${i + 1}</span>${s}</div>`).join('');
+            } else {
+                stepsDiv.innerHTML = '';
+            }
+            document.getElementById('resultSection').classList.add('show');
+            document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function addHistory(expr, result) {
+            history.unshift({ expr, result });
+            if (history.length > 20) history.pop();
+            renderHistory();
+        }
+
+        function renderHistory() {
+            const list = document.getElementById('historyList');
+            if (history.length === 0) {
+                list.innerHTML = '<p style="color:var(--text-dim);font-size:0.8rem;text-align:center;padding:20px;">Hali hisob-kitob yo\'q</p>';
+                return;
+            }
+            list.innerHTML = history.map(h =>
+                `<div class="history-item"><span class="expr">${h.expr}</span><span class="ans">= ${h.result}</span></div>`
+            ).join('');
+        }
+
+        function clearHistory() {
+            history = [];
+            renderHistory();
+        }
+
+        // =================== BASIC ===================
+        function solveBasic() {
+            let expr = document.getElementById('basicInput').value.trim();
+            if (!expr) return;
+
+            let displayExpr = expr.replace(/\*/g, '×').replace(/\//g, '÷');
+            try {
+                let safeExpr = expr
+                    .replace(/\^/g, '**')
+                    .replace(/(\d+)\s*\(/g, '$1*(')
+                    .replace(/\)\s*\(/g, ')*(')
+                    .replace(/\)\s*(\d)/g, ')*$1');
+
+                // Validate
+                if (/[^0-9+\-*/().%\s]/.test(safeExpr.replace(/\*\*/g, ''))) {
+                    throw new Error("Noto'g'ri ifoda");
+                }
+
+                let result = Function('"use strict"; return (' + safeExpr + ')')();
+
+                if (typeof result !== 'number' || isNaN(result)) {
+                    throw new Error("Noto'g'ri natija");
+                }
+
+                let display = Number.isInteger(result) ? result : parseFloat(result.toFixed(10));
+                showResult(display, [
+                    `Ifoda: ${displayExpr}`,
+                    `Hisoblash: ${display}`,
+                    `Natija: <strong>${display}</strong>`
+                ]);
+                addHistory(displayExpr, display);
+            } catch (e) {
+                showResult('❌ Xatolik: Noto\'g\'ri ifoda', [
+                    'Kiritilgan ifoda xato',
+                    'Misol: 2 + 3 * 4 yoki (5+3)/2'
+                ]);
+            }
+        }
+
+        // =================== FRACTIONS ===================
+        function parseFrac(s) {
+            s = s.trim();
+            if (s.includes('/')) {
+                const [n, d] = s.split('/').map(Number);
+                return { n, d };
+            }
+            return { n: Number(s), d: 1 };
+        }
+
+        function gcd(a, b) {
+            a = Math.abs(a); b = Math.abs(b);
+            while (b) { [a, b] = [b, a % b]; }
+            return a;
+        }
+
+        function simplify(frac) {
+            if (frac.d === 0) return frac;
+            if (frac.n === 0) return { n: 0, d: 1 };
+            const g = gcd(frac.n, frac.d);
+            let n = frac.n / g;
+            let d = frac.d / g;
+            if (d < 0) { n = -n; d = -d; }
+            return { n, d };
+        }
+
+        function fracStr(frac) {
+            frac = simplify(frac);
+            if (frac.d === 1) return String(frac.n);
+            return frac.n + '/' + frac.d;
+        }
+
+        function solveFraction() {
+            const f1 = parseFrac(document.getElementById('frac1').value);
+            const f2 = parseFrac(document.getElementById('frac2').value);
+            const op = document.getElementById('fracOp').value;
+
+            if (isNaN(f1.n) || isNaN(f1.d) || isNaN(f2.n) || isNaN(f2.d)) {
+                showResult('❌ Xatolik', ['Kasrlarni to\'g\'ri kiriting']);
+                return;
+            }
+            if (f1.d === 0 || f2.d === 0) {
+                showResult('❌ Xatolik', ['Qiymat 0 ga bo\'linmasligi kerak']);
+                return;
+            }
+
+            let result;
+            let opName;
+            switch (op) {
+                case '+':
+                    result = { n: f1.n * f2.d + f2.n * f1.d, d: f1.d * f2.d };
+                    opName = '+';
+                    break;
+                case '-':
+                    result = { n: f1.n * f2.d - f2.n * f1.d, d: f1.d * f2.d };
+                    opName = '−';
+                    break;
+                case '*':
+                    result = { n: f1.n * f2.n, d: f1.d * f2.d };
+                    opName = '×';
+                    break;
+                case '/':
+                    if (f2.n === 0) {
+                        showResult('❌ Xatolik', ['0 ga bo\'lib bo\'lmaydi']);
+                        return;
+                    }
+                    result = { n: f1.n * f2.d, d: f1.d * f2.n };
+                    opName = '÷';
+                    break;
+            }
+
+            const simplified = simplify(result);
+            const mixedSteps = [];
+
+            mixedSteps.push(`Birinchi kasr: ${fracStr(f1)}`);
+            mixedSteps.push(`Ikkinchi kasr: ${fracStr(f2)}`);
+            mixedSteps.push(`Amal: ${fracStr(f1)} ${opName} ${fracStr(f2)}`);
+
+            if (op === '+' || op === '-') {
+                mixedSteps.push(`Maxsus denom: ${f1.d * f2.d}`);
+                mixedSteps.push(`Natija: ${fracStr(result)} → ${fracStr(simplified)}`);
+            } else {
+                mixedSteps.push(`Natija: ${fracStr(result)} → ${fracStr(simplified)}`);
+            }
+
+            const dec = (simplified.n / simplified.d).toFixed(6);
+            mixedSteps.push(`O'nlik kasr: ${parseFloat(dec)}`);
+
+            showResult(fracStr(simplified), mixedSteps);
+            addHistory(`${fracStr(f1)} ${opName} ${fracStr(f2)}`, fracStr(simplified));
+        }
+
+        // =================== PERCENTAGE ===================
+        function solvePercent() {
+            const val = parseFloat(document.getElementById('percentVal').value);
+            const pct = parseFloat(document.getElementById('percentOf').value);
+            const type = document.getElementById('percentType').value;
+
+            if (isNaN(val) || isNaN(pct)) {
+                showResult('❌ Xatolik', ['Sonlarni to\'g\'ri kiriting']);
+                return;
+            }
+
+            let result, steps = [];
+            switch (type) {
+                case 'of':
+                    result = val * pct / 100;
+                    steps.push(`${pct}% ni ${val} dan topish`);
+                    steps.push(`${val} × ${pct} / 100`);
+                    steps.push(`Natija: <strong>${result}</strong>`);
+                    break;
+                case 'increase':
+                    result = val + val * pct / 100;
+                    steps.push(`${val} ni ${pct}% ga oshirish`);
+                    steps.push(`${val} + ${val} × ${pct} / 100`);
+                    steps.push(`${val} + ${val * pct / 100}`);
+                    steps.push(`Natija: <strong>${result}</strong>`);
+                    break;
+                case 'decrease':
+                    result = val - val * pct / 100;
+                    steps.push(`${val} ni ${pct}% ga kamaytirish`);
+                    steps.push(`${val} - ${val} × ${pct} / 100`);
+                    steps.push(`${val} - ${val * pct / 100}`);
+                    steps.push(`Natija: <strong>${result}</strong>`);
+                    break;
+                case 'reverse':
+                    result = val * 100 / pct;
+                    steps.push(`${pct}% ${val} ga teng bo'lsa, asl sonni topish`);
+                    steps.push(`${val} × 100 / ${pct}`);
+                    steps.push(`Natija: <strong>${result}</strong>`);
+                    break;
+            }
+
+            showResult(result, steps);
+            addHistory(`Foiz: ${val}, ${pct}%, ${type}`, result);
+        }
+
+        // =================== SQRT ===================
+        function solveSqrt() {
+            const val = parseFloat(document.getElementById('sqrtVal').value);
+            const type = document.getElementById('sqrtType').value;
+
+            if (isNaN(val)) {
+                showResult('❌ Xatolik', ['Son kiriting']);
+                return;
+            }
+
+            let n = type === 'n' ? parseInt(document.getElementById('sqrtN').value) : parseInt(type);
+            let steps = [];
+
+            if (type === '2' && val < 0) {
+                showResult('❌ Xatolik', ['Manfiy sondan kvadrat ildiz olib bo\'lmaydi']);
+                return;
+            }
+
+            const result = Math.pow(val, 1 / n);
+            const isExact = Math.abs(result - Math.round(result)) < 1e-10;
+            const roundedResult = isExact ? Math.round(result) : parseFloat(result.toFixed(10));
+
+            steps.push(`${n === 2 ? 'Kvadrat' : n === 3 ? 'Kub' : n + '-daraja'} ildiz: ${val}`);
+            steps.push(`${val}^(1/${n}) = ${roundedResult}`);
+
+            if (isExact) {
+                steps.push(`Aniq ildiz: <strong>${roundedResult}</strong>`);
+            } else {
+                steps.push(`Yaqinlashgan: <strong>${roundedResult}</strong>`);
+            }
+
+            showResult(roundedResult, steps);
+            addHistory(`${n === 2 ? '√' : '∛'}(${val})`, roundedResult);
+        }
+
+        // =================== POWER ===================
+        function solvePower() {
+            const base = parseFloat(document.getElementById('powerBase').value);
+            const exp = parseFloat(document.getElementById('powerExp').value);
+
+            if (isNaN(base) || isNaN(exp)) {
+                showResult('❌ Xatolik', ['Sonlarni kiriting']);
+                return;
+            }
+
+            const result = Math.pow(base, exp);
+            const display = Number.isInteger(result) ? result : parseFloat(result.toFixed(10));
+
+            showResult(display, [
+                `${base}^${exp}`,
+                `${base} × ${base} ... (${Math.abs(exp)} marta)`,
+                `Natija: <strong>${display}</strong>`
+            ]);
+            addHistory(`${base}^${exp}`, display);
+        }
+
+        // =================== QUADRATIC ===================
+        function solveQuadratic() {
+            const a = parseFloat(document.getElementById('quadA').value);
+            const b = parseFloat(document.getElementById('quadB').value);
+            const c = parseFloat(document.getElementById('quadC').value);
+
+            if (isNaN(a) || isNaN(b) || isNaN(c)) {
+                showResult('❌ Xatolik', ['Barcha koeffitsientlarni kiriting']);
+                return;
+            }
+            if (a === 0) {
+                showResult('❌ Xatolik', ['a ≠ 0 bo\'lishi kerak (kvadrat tenglama uchun)']);
+                return;
+            }
+
+            const D = b * b - 4 * a * c;
+            let steps = [
+                `Tenglama: ${a}x² + ${b}x + ${c} = 0`,
+                `Diskriminant: D = b² - 4ac = ${b}² - 4×${a}×${c} = ${D}`
+            ];
+
+            let result;
+            if (D > 0) {
+                const x1 = (-b + Math.sqrt(D)) / (2 * a);
+                const x2 = (-b - Math.sqrt(D)) / (2 * a);
+                const dx1 = Number.isInteger(x1) ? x1 : parseFloat(x1.toFixed(10));
+                const dx2 = Number.isInteger(x2) ? x2 : parseFloat(x2.toFixed(10));
+                steps.push(`D > 0, 2 ta ildiz bor`);
+                steps.push(`x₁ = (${-b} + √${D}) / ${2 * a} = <strong>${dx1}</strong>`);
+                steps.push(`x₂ = (${-b} - √${D}) / ${2 * a} = <strong>${dx2}</strong>`);
+                result = `x₁ = ${dx1}, x₂ = ${dx2}`;
+            } else if (D === 0) {
+                const x = -b / (2 * a);
+                const dx = Number.isInteger(x) ? x : parseFloat(x.toFixed(10));
+                steps.push(`D = 0, 1 ta ildiz bor`);
+                steps.push(`x = ${-b} / ${2 * a} = <strong>${dx}</strong>`);
+                result = `x = ${dx}`;
+            } else {
+                const real = -b / (2 * a);
+                const imag = Math.sqrt(-D) / (2 * a);
+                const dReal = Number.isInteger(real) ? real : parseFloat(real.toFixed(10));
+                const dImag = Number.isInteger(imag) ? imag : parseFloat(imag.toFixed(10));
+                steps.push(`D < 0, ildizlar kompleks`);
+                steps.push(`x₁ = ${dReal} + ${dImag}i`);
+                steps.push(`x₂ = ${dReal} - ${dImag}i`);
+                result = `x₁ = ${dReal} + ${dImag}i, x₂ = ${dReal} - ${dImag}i`;
+            }
+
+            showResult(result, steps);
+            addHistory(`${a}x²+${b}x+${c}=0`, result);
+        }
+
+        // =================== LINEAR ===================
+        function solveLinear() {
+            const a = parseFloat(document.getElementById('linA').value);
+            const b = parseFloat(document.getElementById('linB').value);
+
+            if (isNaN(a) || isNaN(b)) {
+                showResult('❌ Xatolik', ['Koeffitsientlarni kiriting']);
+                return;
+            }
+            if (a === 0) {
+                showResult(b === 0 ? '∞ Cheksiz ko\'p yechim' : '❌ Yechim yo\'q', [
+                    b === 0 ? '0 = 0, har qanday x ishlaydi' : `${b} ≠ 0, tenglama yechimsiz`
+                ]);
+                return;
+            }
+
+            const x = -b / a;
+            const dx = Number.isInteger(x) ? x : parseFloat(x.toFixed(10));
+
+            showResult(`x = ${dx}`, [
+                `${a}x + ${b} = 0`,
+                `${a}x = ${-b}`,
+                `x = ${-b} / ${a}`,
+                `x = <strong>${dx}</strong>`
+            ]);
+            addHistory(`${a}x+${b}=0`, dx);
+        }
+
+        // =================== SYSTEM ===================
+        function solveSystem() {
+            const a1 = parseFloat(document.getElementById('sysA1').value);
+            const b1 = parseFloat(document.getElementById('sysB1').value);
+            const c1 = parseFloat(document.getElementById('sysC1').value);
+            const a2 = parseFloat(document.getElementById('sysA2').value);
+            const b2 = parseFloat(document.getElementById('sysB2').value);
+            const c2 = parseFloat(document.getElementById('sysC2').value);
+
+            if ([a1, b1, c1, a2, b2, c2].some(isNaN)) {
+                showResult('❌ Xatolik', ['Barcha qiymatlarni kiriting']);
+                return;
+            }
+
+            const D = a1 * b2 - a2 * b1;
+            let steps = [
+                `${a1}x + ${b1}y = ${c1}`,
+                `${a2}x + ${b2}y = ${c2}`,
+                `D = ${a1}×${b2} - ${a2}×${b1} = ${D}`
+            ];
+
+            if (D === 0) {
+                showResult('❌ Yechim yo\'q yoki cheksiz', ['Determinant = 0']);
+                return;
+            }
+
+            const Dx = c1 * b2 - c2 * b1;
+            const Dy = a1 * c2 - a2 * c1;
+            const x = Dx / D;
+            const y = Dy / D;
+            const dx = parseFloat(x.toFixed(10));
+            const dy = parseFloat(y.toFixed(10));
+
+            steps.push(`Dx = ${c1}×${b2} - ${c2}×${b1} = ${Dx}`);
+            steps.push(`Dy = ${a1}×${c2} - ${a2}×${c1} = ${Dy}`);
+            steps.push(`x = Dx/D = ${Dx}/${D} = <strong>${dx}</strong>`);
+            steps.push(`y = Dy/D = ${Dy}/${D} = <strong>${dy}</strong>`);
+
+            showResult(`x = ${dx}, y = ${dy}`, steps);
+            addHistory(`System: x=${dx}, y=${dy}`, `x=${dx}, y=${dy}`);
+        }
+
+        // =================== SEQUENCE ===================
+        function solveSequence() {
+            const a1 = parseFloat(document.getElementById('seqA1').value);
+            const d = parseFloat(document.getElementById('seqD').value);
+            const n = parseInt(document.getElementById('seqN').value);
+            const type = document.getElementById('seqType').value;
+            const calc = document.getElementById('seqCalc').value;
+
+            if ([a1, d, n].some(isNaN) || n < 1) {
+                showResult('❌ Xatolik', ['Barcha qiymatlarni kiriting']);
+                return;
+            }
+
+            let result, steps = [];
+
+            if (type === 'arithmetic') {
+                steps.push(`Aritmetik progressiya: a₁=${a1}, d=${d}`);
+                if (calc === 'nth') {
+                    result = a1 + (n - 1) * d;
+                    steps.push(`aₙ = a₁ + (n-1)d`);
+                    steps.push(`a${subscript(n)} = ${a1} + (${n}-1)×${d}`);
+                    steps.push(`a${subscript(n)} = ${a1} + ${(n - 1) * d}`);
+                    steps.push(`Natija: <strong>${result}</strong>`);
+                } else {
+                    result = n / 2 * (2 * a1 + (n - 1) * d);
+                    steps.push(`Sₙ = n/2 × (2a₁ + (n-1)d)`);
+                    steps.push(`S${subscript(n)} = ${n}/2 × (2×${a1} + ${n - 1}×${d})`);
+                    steps.push(`S${subscript(n)} = ${n / 2} × ${2 * a1 + (n - 1) * d}`);
+                    steps.push(`Natija: <strong>${result}</strong>`);
+                }
+            } else {
+                steps.push(`Geometrik progressiya: a₁=${a1}, q=${d}`);
+                if (calc === 'nth') {
+                    result = a1 * Math.pow(d, n - 1);
+                    steps.push(`aₙ = a₁ × q^(n-1)`);
+                    steps.push(`a${subscript(n)} = ${a1} × ${d}^${n - 1}`);
+                    steps.push(`Natija: <strong>${parseFloat(result.toFixed(10))}</strong>`);
+                    result = parseFloat(result.toFixed(10));
+                } else {
+                    if (d === 1) {
+                        result = a1 * n;
+                        steps.push(`q=1, Sₙ = a₁ × n = ${a1} × ${n} = <strong>${result}</strong>`);
+                    } else {
+                        result = a1 * (Math.pow(d, n) - 1) / (d - 1);
+                        steps.push(`Sₙ = a₁ × (qⁿ - 1) / (q - 1)`);
+                        steps.push(`S${subscript(n)} = ${a1} × (${d}^${n} - 1) / (${d} - 1)`);
+                        steps.push(`Natija: <strong>${parseFloat(result.toFixed(10))}</strong>`);
+                        result = parseFloat(result.toFixed(10));
+                    }
+                }
+            }
+
+            showResult(result, steps);
+            addHistory(`Progressiya: a₁=${a1}, d=${d}, n=${n}`, result);
+        }
+
+        function subscript(n) {
+            const subs = '₀₁₂₃₄₅₆₇₈₉';
+            return String(n).split('').map(d => subs[parseInt(d)]).join('');
+        }
+
+        // =================== TRIGONOMETRY ===================
+        function solveTrig() {
+            const val = parseFloat(document.getElementById('trigVal').value);
+            const unit = document.getElementById('trigUnit').value;
+            const func = document.getElementById('trigFunc').value;
+
+            if (isNaN(val)) {
+                showResult('❌ Xatolik', ['Qiymat kiriting']);
+                return;
+            }
+
+            let rad = unit === 'deg' ? val * Math.PI / 180 : val;
+            let result, steps = [];
+
+            const formatNum = (n) => {
+                if (Math.abs(n) < 1e-10) return 0;
+                if (Math.abs(n - 1) < 1e-10) return 1;
+                if (Math.abs(n + 1) < 1e-10) return -1;
+                return parseFloat(n.toFixed(10));
+            };
+
+            switch (func) {
+                case 'sin':
+                    result = formatNum(Math.sin(rad));
+                    steps.push(`sin(${val}${unit === 'deg' ? '°' : ' rad'})`);
+                    steps.push(`Radyan: ${rad.toFixed(6)}`);
+                    steps.push(`Natija: <strong>${result}</strong>`);
+                    break;
+                case 'cos':
+                    result = formatNum(Math.cos(rad));
+                    steps.push(`cos(${val}${unit === 'deg' ? '°' : ' rad'})`);
+                    steps.push(`Radyan: ${rad.toFixed(6)}`);
+                    steps.push(`Natija: <strong>${result}</strong>`);
+                    break;
+                case 'tan':
+                    result = formatNum(Math.tan(rad));
+                    steps.push(`tan(${val}${unit === 'deg' ? '°' : ' rad'})`);
+                    steps.push(`Radyan: ${rad.toFixed(6)}`);
+                    steps.push(`Natija: <strong>${result}</strong>`);
+                    break;
+                case 'asin':
+                    if (val < -1 || val > 1) {
+                        showResult('❌ Xatolik', ['arcsin uchun -1 ≤ x ≤ 1']);
+                        return;
+                    }
+                    result = formatNum(unit === 'deg' ? Math.asin(val) * 180 / Math.PI : Math.asin(val));
+                    steps.push(`arcsin(${val})`);
+                    steps.push(`Natija: <strong>${result}</strong> ${unit === 'deg' ? '°' : 'rad'}`);
+                    break;
+                case 'acos':
+                    if (val < -1 || val > 1) {
+                        showResult('❌ Xatolik', ['arccos uchun -1 ≤ x ≤ 1']);
+                        return;
+                    }
+                    result = formatNum(unit === 'deg' ? Math.acos(val) * 180 / Math.PI : Math.acos(val));
+                    steps.push(`arccos(${val})`);
+                    steps.push(`Natija: <strong>${result}</strong> ${unit === 'deg' ? '°' : 'rad'}`);
+                    break;
+                case 'atan':
+                    result = formatNum(unit === 'deg' ? Math.atan(val) * 180 / Math.PI : Math.atan(val));
+                    steps.push(`arctan(${val})`);
+                    steps.push(`Natija: <strong>${result}</strong> ${unit === 'deg' ? '°' : 'rad'}`);
+                    break;
+            }
+
+            showResult(result, steps);
+            addHistory(`${func}(${val})`, result);
+        }
+
+        // =================== FACTORIAL ===================
+        function solveFactorial() {
+            const n = parseInt(document.getElementById('factN').value);
+            const type = document.getElementById('factType').value;
+
+            if (isNaN(n) || n < 0) {
+                showResult('❌ Xatolik', ['Ijobat son kiriting']);
+                return;
+            }
+            if (n > 170) {
+                showResult('❌ Xatolik', ['170 dan katta faktorial hisoblab bo\'lmaydi']);
+                return;
+            }
+
+            function fact(num) {
+                if (num <= 1) return 1;
+                let r = 1;
+                for (let i = 2; i <= num; i++) r *= i;
+                return r;
+            }
+
+            let result, steps = [];
+
+            if (type === 'factorial') {
+                result = fact(n);
+                steps.push(`${n}! = ${n} × ${n - 1} × ... × 2 × 1`);
+                steps.push(`Natija: <strong>${result}</strong>`);
+            } else if (type === 'perm') {
+                const k = parseInt(document.getElementById('factK').value);
+                if (isNaN(k) || k < 0 || k > n) {
+                    showResult('❌ Xatolik', ['0 ≤ k ≤ n bo\'lishi kerak']);
+                    return;
+                }
+                result = fact(n) / fact(n - k);
+                steps.push(`P(${n},${k}) = ${n}! / (${n}-${k})!`);
+                steps.push(`P(${n},${k}) = ${fact(n)} / ${fact(n - k)}`);
+                steps.push(`Natija: <strong>${result}</strong>`);
+            } else {
+                const k = parseInt(document.getElementById('factK').value);
+                if (isNaN(k) || k < 0 || k > n) {
+                    showResult('❌ Xatolik', ['0 ≤ k ≤ n bo\'lishi kerak']);
+                    return;
+                }
+                result = fact(n) / (fact(k) * fact(n - k));
+                steps.push(`C(${n},${k}) = ${n}! / (${k}! × ${n - k}!)`);
+                steps.push(`C(${n},${k}) = ${fact(n)} / (${fact(k)} × ${fact(n - k)})`);
+                steps.push(`C(${n},${k}) = ${fact(n)} / ${fact(k) * fact(n - k)}`);
+                steps.push(`Natija: <strong>${result}</strong>`);
+            }
+
+            showResult(result, steps);
+            addHistory(`Faktorial: ${n}`, result);
+        }
+
+        // =================== GEOMETRY ===================
+        const geoShapes = {
+            circle: {
+                area: { inputs: ['r'], calc: (v) => Math.PI * v.r * v.r, formula: 'S = πr²' },
+                perimeter: { inputs: ['r'], calc: (v) => 2 * Math.PI * v.r, formula: 'L = 2πr' }
+            },
+            rectangle: {
+                area: { inputs: ['a', 'b'], calc: (v) => v.a * v.b, formula: 'S = a × b' },
+                perimeter: { inputs: ['a', 'b'], calc: (v) => 2 * (v.a + v.b), formula: 'P = 2(a + b)' }
+            },
+            triangle: {
+                area: { inputs: ['a', 'h'], calc: (v) => 0.5 * v.a * v.h, formula: 'S = ½ah' },
+                perimeter: { inputs: ['a', 'b', 'c'], calc: (v) => v.a + v.b + v.c, formula: 'P = a + b + c' }
+            },
+            trapezoid: {
+                area: { inputs: ['a', 'b', 'h'], calc: (v) => 0.5 * (v.a + v.b) * v.h, formula: 'S = ½(a+b)h' },
+                perimeter: { inputs: ['a', 'b', 'c', 'd'], calc: (v) => v.a + v.b + v.c + v.d, formula: 'P = a+b+c+d' }
+            },
+            sphere: {
+                area: { inputs: ['r'], calc: (v) => 4 * Math.PI * v.r * v.r, formula: 'S = 4πr²' },
+                volume: { inputs: ['r'], calc: (v) => (4 / 3) * Math.PI * v.r * v.r * v.r, formula: 'V = 4/3 πr³' }
+            },
+            cylinder: {
+                area: { inputs: ['r', 'h'], calc: (v) => 2 * Math.PI * v.r * (v.r + v.h), formula: 'S = 2πr(r+h)' },
+                volume: { inputs: ['r', 'h'], calc: (v) => Math.PI * v.r * v.r * v.h, formula: 'V = πr²h' }
+            },
+            cone: {
+                area: { inputs: ['r', 'l'], calc: (v) => Math.PI * v.r * (v.r + v.l), formula: 'S = πr(r+l)' },
+                volume: { inputs: ['r', 'h'], calc: (v) => (1 / 3) * Math.PI * v.r * v.r * v.h, formula: 'V = ⅓πr²h' }
+            }
+        };
+
+        function updateGeoInputs() {
+            const shape = document.getElementById('geoShape').value;
+            const calc = document.getElementById('geoCalc').value;
+            const data = geoShapes[shape]?.[calc];
+
+            const calcSelect = document.getElementById('geoCalc');
+            const avail = Object.keys(geoShapes[shape] || {});
+            calcSelect.innerHTML = avail.map(c =>
+                `<option value="${c}" ${c === calc ? 'selected' : ''}>${c === 'area' ? 'Yuza (S)' : c === 'perimeter' ? 'Perimetr (P)' : 'Hajm (V)'}</option>`
+            ).join('');
+
+            const container = document.getElementById('geoInputs');
+            if (!data) {
+                container.innerHTML = '<p style="color:var(--danger);">Bu shakl uchun tanlangan hisoblash mavjud emas</p>';
+                return;
+            }
+
+            const labels = {
+                r: 'Radius (r)',
+                a: 'Uzunlik (a)',
+                b: 'Kenglik (b)',
+                c: 'Uzunlik (c)',
+                d: 'Uzunlik (d)',
+                h: 'Balandlik (h)',
+                l: 'Generatsiya (l)'
+            };
+
+            container.innerHTML = data.inputs.map(k =>
+                `<div class="input-group"><label>${labels[k] || k}</label><input type="number" id="geo_${k}" placeholder="${k}" step="any"></div>`
+            ).join('');
+
+            if (data.inputs.length <= 2) container.classList.add('row-2');
+            else if (data.inputs.length <= 3) container.classList.add('row-3');
+        }
+
+        function solveGeometry() {
+            const shape = document.getElementById('geoShape').value;
+            const calc = document.getElementById('geoCalc').value;
+            const data = geoShapes[shape]?.[calc];
+
+            if (!data) {
+                showResult('❌ Xatolik', ['Bu hisoblash mavjud emas']);
+                return;
+            }
+
+            const values = {};
+            for (const k of data.inputs) {
+                values[k] = parseFloat(document.getElementById('geo_' + k)?.value);
+                if (isNaN(values[k])) {
+                    showResult('❌ Xatolik', ['Barcha qiymatlarni kiriting']);
+                    return;
+                }
+                if (values[k] < 0) {
+                    showResult('❌ Xatolik', ['Qiymat manfiy bo\'lmasligi kerak']);
+                    return;
+                }
+            }
+
+            const result = parseFloat(data.calc(values).toFixed(10));
+            const inputStr = data.inputs.map(k => `${k}=${values[k]}`).join(', ');
+
+            showResult(result, [
+                `${data.formula}`,
+                `Kiritilgan: ${inputStr}`,
+                `Natija: <strong>${result}</strong>`
+            ]);
+            addHistory(`Geometriya: ${inputStr}`, result);
+        }
+
+        // =================== STATISTICS ===================
+        function solveStats() {
+            const raw = document.getElementById('statsData').value;
+            const nums = raw.split(/[,;\s]+/).map(Number).filter(n => !isNaN(n));
+
+            if (nums.length === 0) {
+                showResult('❌ Xatolik', ['Sonlarni kiriting']);
+                return;
+            }
+
+            const n = nums.length;
+            const sorted = [...nums].sort((a, b) => a - b);
+            const sum = nums.reduce((a, b) => a + b, 0);
+            const mean = sum / n;
+            const variance = nums.reduce((a, b) => a + Math.pow(b - mean, 2), 0) / n;
+            const stddev = Math.sqrt(variance);
+            const median = n % 2 === 0 ?
+                (sorted[n / 2 - 1] + sorted[n / 2]) / 2 :
+                sorted[Math.floor(n / 2)];
+
+            const modeMap = {};
+            nums.forEach(n => { modeMap[n] = (modeMap[n] || 0) + 1; });
+            const maxFreq = Math.max(...Object.values(modeMap));
+            const modes = Object.entries(modeMap).filter(([_, v]) => v === maxFreq).map(([k]) => Number(k));
+            const mode = maxFreq === 1 ? "Yo'q (barchasi noyob)" : modes.join(', ');
+
+            const fmt = (v) => parseFloat(v.toFixed(10));
+
+            showResult(fmt(mean), [
+                `Sonlar: ${nums.join(', ')}`,
+                `Soni: ${n}`,
+                `Yig'indi: ${sum}`,
+                `O'rtacha (μ): <strong>${fmt(mean)}</strong>`,
+                `Medianna: <strong>${fmt(median)}</strong>`,
+                `Moda: <strong>${mode}</strong>`,
+                `Disporsiya (σ²): <strong>${fmt(variance)}</strong>`,
+                `Standart chetlanish (σ): <strong>${fmt(stddev)}</strong>`,
+                `Eng kichik: ${sorted[0]}, Eng katta: ${sorted[n - 1]}`
+            ]);
+            addHistory(`Statistika: ${n} ta son`, `μ=${fmt(mean)}`);
+        }
+
+        // =================== MODULAR ===================
+        function solveMod() {
+            const a = parseInt(document.getElementById('modA').value);
+            const m = parseInt(document.getElementById('modM').value);
+            const type = document.getElementById('modType').value;
+
+            if (isNaN(a) || isNaN(m) || m <= 0) {
+                showResult('❌ Xatolik', ['To\'g\'ri sonlar kiriting (m > 0)']);
+                return;
+            }
+
+            let result, steps = [];
+
+            switch (type) {
+                case 'mod':
+                    result = ((a % m) + m) % m;
+                    steps.push(`${a} mod ${m}`);
+                    steps.push(`${a} ÷ ${m} = ${Math.floor(a / m)} qoldiq ${a % m}`);
+                    steps.push(`Natija: <strong>${result}</strong>`);
+                    break;
+                case 'gcd':
+                    let ga = Math.abs(a), gm = m;
+                    let temp_a = ga, temp_m = gm;
+                    steps.push(`EKUB(${a}, ${m})`);
+                    steps.push(`Evklid algoritmi:`);
+                    while (gm) {
+                        steps.push(`${ga} = ${Math.floor(ga / gm)} × ${gm} + ${ga % gm}`);
+                        [ga, gm] = [gm, ga % gm];
+                    }
+                    result = ga;
+                    steps.push(`Natija: <strong>${result}</strong>`);
+                    break;
+                case 'lcm':
+                    function gcdForLcm(x, y) {
+                        x = Math.abs(x); y = Math.abs(y);
+                        while (y) { [x, y] = [y, x % y]; }
+                        return x;
+                    }
+                    const g = gcdForLcm(Math.abs(a), m);
+                    result = Math.abs(a) * m / g;
+                    steps.push(`EKUK[${a}, ${m}]`);
+                    steps.push(`EKUK = |a| × m / EKUB(a, m)`);
+                    steps.push(`EKUB(${Math.abs(a)}, ${m}) = ${g}`);
+                    steps.push(`EKUK = ${Math.abs(a)} × ${m} / ${g}`);
+                    steps.push(`Natija: <strong>${result}</strong>`);
+                    break;
+            }
+
+            showResult(result, steps);
+            addHistory(`Mod: ${a} ${type} ${m}`, result);
+        }
+
+        // =================== INIT ===================
+        renderTopics();
+        updateGeoInputs();
+
+        document.getElementById('factType').dispatchEvent(new Event('change'));
+        document.getElementById('sqrtType').dispatchEvent(new Event('change'));
+    </script>
+</body>
+</html>
