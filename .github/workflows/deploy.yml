@@ -3,7 +3,7 @@ name: UzShop-ni GitHub Pages-ga yuklash
 on:
   push:
     branches: [master]
-    paths: ['1sayt/**', 'racing-game/**', 'math-calculator.html', '.github/workflows/**']
+    paths: ['1sayt/**', 'racing-game/**', 'math-calculator.html', 'matematika-sayti/index.html', 'matematika-sayti/app.js', 'matematika-sayti/styles.css', 'matematika-sayti/styles.min.css', 'matematika-sayti/data/questions.js', '.github/workflows/**']
 
 jobs:
   deploy:
@@ -19,10 +19,12 @@ jobs:
 
       - name: Sayt va o'yinni tayyorlash
         run: |
-          mkdir -p public
+          mkdir -p public/matematika-sayti/data
           cp -r 1sayt/* public/
           cp -r racing-game public/racing-game
           cp math-calculator.html public/
+          cp matematika-sayti/index.html matematika-sayti/app.js matematika-sayti/styles.css matematika-sayti/styles.min.css public/matematika-sayti/
+          cp matematika-sayti/data/questions.js public/matematika-sayti/data/
 
       - uses: actions/configure-pages@v4
       - uses: actions/upload-pages-artifact@v3

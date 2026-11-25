@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="PUZA Geometriya 1 test bankasi asosidagi 30 savolli geometriya testlari, chizmalar, natija va xatolarni tahlil qilish.">
+  <title>Geometriya | PUZA DI TEST</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%235146e5'/%3E%3Cpath d='M32 9 55 51H9Z' fill='none' stroke='%23ffffff' stroke-width='4' stroke-linejoin='round'/%3E%3Ccircle cx='32' cy='9' r='5' fill='%23ffd166'/%3E%3Ccircle cx='9' cy='51' r='5' fill='%23ffd166'/%3E%3Ccircle cx='55' cy='51' r='5' fill='%23ffd166'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css?v=7">
+</head>
+<body>
+
+  <section class="view view-auth active" id="view-auth">
+    <div class="auth-shell">
+      <aside class="auth-brand">
+        <div class="brand-mark">
+          <span class="brand-mark-text">∠</span>
+        </div>
+        <h1>Geometriya<br>olami</h1>
+        <p>PUZA Geometriya 1 uslubida 30 ta savol, darhol natija va xatolarning batafsil tahlili.</p>
+        <ul class="brand-list">
+          <li>Burchaklar va uchburchaklar</li>
+          <li>Har bir mavzu uchun 30 ta test</li>
+          <li>Xato javoblarning izohi</li>
+          <li>Natijalarni saqlash</li>
+        </ul>
+        <div class="brand-foot">Testlarni boshlash uchun ro'yxatdan o'ting</div>
+      </aside>
+
+      <div class="auth-panel">
+        <div class="auth-tabs" role="tablist">
+          <button type="button" class="auth-tab active" id="tab-register" role="tab">Ro'yxatdan o'tish</button>
+          <button type="button" class="auth-tab" id="tab-login" role="tab">Kirish</button>
+        </div>
+
+        <form class="auth-form" id="register-form" novalidate>
+          <h2>Hisob yaratish</h2>
+          <p class="form-subtitle">Birinchi kirishda ro'yxatdan o'tish shart.</p>
+
+          <label class="field">
+            <span>To'liq ismingiz</span>
+            <input type="text" id="reg-name" placeholder="Masalan: Alimov Aziz" autocomplete="name">
+          </label>
+          <label class="field">
+            <span>Email</span>
+            <input type="email" id="reg-email" placeholder="aziz@example.com" autocomplete="email">
+          </label>
+          <label class="field">
+            <span>Foydalanuvchi nomi</span>
+            <input type="text" id="reg-username" placeholder="aziz2026" autocomplete="username">
+          </label>
+          <label class="field">
+            <span>Parol</span>
+            <input type="password" id="reg-password" placeholder="Kamida 6 belgi" autocomplete="new-password">
+          </label>
+          <label class="field">
+            <span>Parolni tasdiqlang</span>
+            <input type="password" id="reg-confirm" placeholder="Parolni qayta yozing" autocomplete="new-password">
+          </label>
+
+          <p class="form-error" id="reg-error" role="alert"></p>
+          <button type="submit" class="btn btn-primary btn-block">Ro'yxatdan o'tish</button>
+        </form>
+
+        <form class="auth-form hidden" id="login-form" novalidate>
+          <h2>Qayta kirish</h2>
+          <p class="form-subtitle">Email yoki foydalanuvchi nomingiz bilan kiring.</p>
+
+          <label class="field">
+            <span>Email yoki foydalanuvchi nomi</span>
+            <input type="text" id="login-identifier" placeholder="aziz@example.com" autocomplete="username">
+          </label>
+          <label class="field">
+            <span>Parol</span>
+            <input type="password" id="login-password" placeholder="Parolingiz" autocomplete="current-password">
+          </label>
+
+          <p class="form-error" id="login-error" role="alert"></p>
+          <button type="submit" class="btn btn-primary btn-block">Kirish</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="view" id="view-home">
+    <header class="app-header">
+      <div class="header-inner">
+        <div class="logo"><span class="logo-mark">△</span> Geometriya</div>
+        <div class="user-area">
+          <button type="button" class="btn btn-ghost" id="admin-btn">Admin</button>
+          <div class="user-chip"><span class="avatar" id="user-avatar"></span><span id="user-name"></span></div>
+          <button type="button" class="btn btn-ghost" id="logout-btn">Chiqish</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <div class="hero">
+        <div>
+          <span class="eyebrow">PUZA GEOMETRIYA 1 (TR-YÖS) USLUBIDA</span>
+          <h1>Savolga javob ber, natijani ko'r</h1>
+          <p>Har bir geometriya mavzusi 30 ta savoldan ibarat. Testni yakunlagach, nechta to'g'ri topganingizni va qaysi savollarda xato qilganingizni ko'rasiz.</p>
+          <p>Savollar PUZA Geometriya 1 kitobi uslubida tuzilgan.</p>
+        </div>
+        <div class="hero-stats" style="flex-wrap: wrap; justify-content: flex-end;">
+          <div><strong id="stat-topics">0</strong><span>mavzu</span></div>
+          <div><strong>30</strong><span>savol / test</span></div>
+          <div><strong id="stat-tests">0</strong><span>ishlangan test</span></div>
+          <div><strong id="stat-avg">0%</strong><span>o'rtacha foiz</span></div>
+          <div><strong id="stat-best">0%</strong><span>eng yaxshi</span></div>
+          <div><strong id="stat-accuracy">0%</strong><span>aniqlik</span></div>
+        </div>
+      </div>
+
+      <div class="section-title">
+        <div>
+          <h2>Geometriya mavzulari</h2>
+          <p>Faol mavzuni tanlab testni boshlang.</p>
+        </div>
+      </div>
+      <div class="topics-grid" id="topics-grid"></div>
+
+      <div class="section-title history-title">
+        <div>
+          <h2>Natijalarim</h2>
+          <p>Oxirgi ishlagan testlaringiz.</p>
+        </div>
+      </div>
+      <div class="history-list" id="history-list"></div>
+    </main>
+  </section>
+
+  <section class="view" id="view-test">
+    <header class="app-header">
+      <div class="header-inner">
+        <button type="button" class="btn btn-ghost" id="test-back">← Mavzular</button>
+        <div class="test-heading"><span id="test-topic-title"></span></div>
+        <div class="timer" id="timer">30:00</div>
+      </div>
+    </header>
+
+    <main class="container test-layout">
+      <div class="test-main">
+        <div class="progress-head">
+          <span id="progress-text">1 / 30</span>
+          <span id="answered-text">0 ta javob berildi</span>
+        </div>
+        <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+
+        <div class="question-card">
+          <div class="question-label">Savol <span id="question-number">1</span></div>
+          <h2 id="question-text"></h2>
+          <div class="question-diagram" id="question-diagram" aria-label="Savol chizmasi"></div>
+          <div class="options" id="options"></div>
+        </div>
+
+        <div class="test-controls">
+          <button type="button" class="btn btn-secondary" id="prev-btn">← Oldingi</button>
+          <button type="button" class="btn btn-secondary" id="next-btn">Keyingi →</button>
+        </div>
+
+        <div class="finish-row">
+          <span class="finish-hint" id="finish-hint">Barcha 30 ta savolga javob bering</span>
+          <button type="button" class="btn btn-primary" id="finish-btn" disabled>Yakunlash</button>
+        </div>
+      </div>
+
+      <aside class="palette">
+        <h3>Savollar</h3>
+        <p>Javob berish uchun raqamni bosing.</p>
+        <div class="palette-grid" id="palette"></div>
+        <div class="palette-legend">
+          <span><i class="dot dot-current"></i> Hozirgi</span>
+          <span><i class="dot dot-done"></i> Javob berilgan</span>
+          <span><i class="dot"></i> Qolgan</span>
+        </div>
+      </aside>
+    </main>
+  </section>
+
+  <section class="view" id="view-result">
+    <header class="app-header">
+      <div class="header-inner">
+        <div class="logo"><span class="logo-mark">△</span> Geometriya</div>
+        <button type="button" class="btn btn-ghost" id="result-home">Mavzularga qaytish</button>
+      </div>
+    </header>
+
+    <main class="container">
+      <div class="result-hero">
+        <div class="score-ring" id="score-ring"><div><strong id="score-value">0</strong><span>/ 30</span></div></div>
+        <div class="result-summary">
+          <span class="eyebrow">TEST YAKUNLANDI</span>
+          <h1 id="result-title"></h1>
+          <p id="result-detail"></p>
+          <div class="result-meta">
+            <span>To'g'ri: <strong id="result-correct"></strong></span>
+            <span>Xato: <strong id="result-wrong"></strong></span>
+            <span>Vaqt: <strong id="result-time"></strong></span>
+            <span>Baho: <strong id="result-grade"></strong></span>
+          </div>
+          <div class="result-actions">
+            <button type="button" class="btn btn-primary" id="retake-btn">Qaytadan ishlash</button>
+            <button type="button" class="btn btn-secondary" id="retry-wrong-btn" disabled>Faqat xatolarni qayta ishlash</button>
+            <button type="button" class="btn btn-secondary" id="certificate-btn">Sertifikatni yuklab olish</button>
+            <button type="button" class="btn btn-secondary" id="result-home-2">Mavzularga qaytish</button>
+          </div>
+        </div>
+      </div>
+
+      <section class="result-section">
+        <div class="section-title">
+          <div>
+            <h2>Xatolaringiz <span class="count-badge" id="mistake-count">0</span></h2>
+            <p>Har bir xato savol va to'g'ri javob izohi bilan keltirilgan.</p>
+          </div>
+        </div>
+        <div class="mistake-list" id="mistake-list"></div>
+      </section>
+
+      <details class="result-section correct-section">
+        <summary>To'g'ri javoblar ro'yxati <span class="count-badge" id="correct-count">0</span></summary>
+        <div class="correct-list" id="correct-list"></div>
+      </details>
+    </main>
+  </section>
+
+  <section class="view" id="view-admin">
+    <header class="app-header">
+      <div class="header-inner">
+        <div class="logo"><span class="logo-mark">△</span> Boshqaruv paneli</div>
+        <button type="button" class="btn btn-ghost" id="admin-home-btn">Bosh sahifa</button>
+      </div>
+    </header>
+
+    <main class="container">
+      <form class="auth-form" id="admin-login-form" novalidate style="max-width: 440px;">
+        <h2>Admin kirishi</h2>
+        <p class="form-subtitle">Mavzular va natijalarni boshqarish uchun kalit kiriting.</p>
+        <label class="field">
+          <span>Admin kaliti</span>
+          <input type="password" id="admin-password" placeholder="Admin kaliti" autocomplete="off">
+        </label>
+        <p class="form-error" id="admin-error" role="alert"></p>
+        <button type="submit" class="btn btn-primary" id="admin-login-btn">Panelni ochish</button>
+      </form>
+
+      <div id="admin-panel" class="hidden">
+        <div class="section-title">
+          <div>
+            <h2>Geometriya kontenti</h2>
+            <p>Mavzular, savollar va natijalarni boshqaring.</p>
+          </div>
+          <button type="button" class="btn btn-secondary" id="admin-reset-btn">Kalitni o'zgartirish</button>
+          <button type="button" class="btn btn-secondary" id="weekly-report-btn">Haftalik hisobotni yuborish</button>
+        </div>
+        <div class="auth-tabs" role="tablist">
+          <button type="button" class="auth-tab active" id="admin-tab-topics" role="tab">Mavzular</button>
+          <button type="button" class="auth-tab" id="admin-tab-questions" role="tab">Savollar</button>
+          <button type="button" class="auth-tab" id="admin-tab-results" role="tab">Natijalar</button>
+          <button type="button" class="auth-tab" id="admin-tab-stats" role="tab">Statistika</button>
+        </div>
+
+        <div id="admin-topics">
+          <div id="admin-topic-list" class="topics-grid"></div>
+          <div class="finish-row" style="margin-top: 18px;">
+            <span class="finish-hint">O'zgartirishlardan so'ng saqlang.</span>
+            <button type="button" class="btn btn-primary" id="admin-save-topics">Mavzularni saqlash</button>
+          </div>
+        </div>
+
+        <div id="admin-questions" class="hidden">
+          <label class="field">
+            <span>Mavzu</span>
+            <select id="admin-question-topic" style="width: 100%; padding: 12px 14px; border: 1px solid var(--border); border-radius: 10px; background: #fbfcff; color: var(--ink); font: inherit;"></select>
+          </label>
+          <div id="admin-question-list" class="topics-grid"></div>
+          <div class="finish-row" style="margin-top: 18px;">
+            <button type="button" class="btn btn-secondary" id="admin-add-question">Savol qo'shish</button>
+            <button type="button" class="btn btn-primary" id="admin-save-questions">Savollarni saqlash</button>
+          </div>
+        </div>
+
+        <div id="admin-results" class="hidden"></div>
+        <div id="admin-stats" class="hidden"></div>
+      </div>
+    </main>
+  </section>
+
+  <div class="toast" id="toast" role="status"></div>
+
+  <script src="data/questions.js?v=7"></script>
+  <script src="app.js?v=7"></script>
+</body>
+</html>
